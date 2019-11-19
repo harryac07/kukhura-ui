@@ -1,0 +1,3 @@
+export const TEST_REQUEST = 'TEST_REQUEST'
+export const TEST_SUCCEED = 'TEST_SUCCEED'
+export const TEST_FAILED = 'TEST_FAILED'
