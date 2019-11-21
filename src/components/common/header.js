@@ -123,8 +123,8 @@ const Header = (props) => {
           <li onClick={() => setActiveMenu('products')}>
             <Link style={activeMenu.toLocaleLowerCase() === 'products' ? { color: 'red' } : {}} to="/products">PRODUCTS</Link>
           </li>
-          <li onClick={() => setActiveMenu('contacts')}>
-            <Link style={activeMenu.toLocaleLowerCase() === 'contacts' ? { color: 'red' } : {}} to="/contacts">CONTACTS</Link>
+          <li onClick={() => setActiveMenu('contact')}>
+            <Link style={activeMenu.toLocaleLowerCase() === 'contact' ? { color: 'red' } : {}} to="/contact">CONTACT</Link>
           </li>
         </ul>
       </div>

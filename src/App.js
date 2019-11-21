@@ -10,6 +10,8 @@ import {
 import Home from './components/home';
 import About from './components/about';
 import Products from './components/products';
+import Contact from './components/contact';
+
 import Header from './components/common/header'
 import Footer from './components/common/footer'
 
@@ -30,6 +32,9 @@ function App() {
           </Route>
           <Route path="/products">
             <Products />
+          </Route>
+          <Route path="/contact">
+            <Contact />
           </Route>
         </Switch>
 

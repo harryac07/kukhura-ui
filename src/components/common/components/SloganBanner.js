@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
-import {Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const SloganDiv = styled.div`
   background-image: ${props => props.bgImageUrl ? props.bgImageUrl : ''};
@@ -12,9 +12,12 @@ const SloganDiv = styled.div`
   justify-content: center;
   align-items: center;
   color: #fff;
-  
+
   h2{
     font-weight: inherit;
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
   }
 `;
 
