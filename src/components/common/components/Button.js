@@ -12,7 +12,13 @@ export const OrangeButton = styled(Button)({
   '&:hover': {
     backgroundColor: props => props.bgColor ? props.bgColor : '#f65314',
   },
-  '@media (max-width: 1024px)': {
+  '@media (max-width: 1280px)': {
+    padding: '6px 12px',
+    fontWeight: 200,
+    borderRadius: 0,
+    fontSize: 12,
+  },
+  '@media (max-width: 960px)': {
     padding: '6px 12px',
     fontWeight: 200,
     borderRadius: 0,

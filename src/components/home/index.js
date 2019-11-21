@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { compose } from "redux";
 import { connect } from "react-redux";
 import styled from 'styled-components';
-import { Typography } from '@material-ui/core';
 
 import HeroCarousel from './component/HeroCarousel'
 import WelcomeGreeting from './component/Welcome'

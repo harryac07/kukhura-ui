@@ -36,7 +36,7 @@ export const WrapperDiv = style.div`
   display:${props => props.inlineBlock ? 'inline-block' : props.flex ? 'flex' : 'block'};
   align-items: center;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     margin: 0px 20px;
   }
 `;
@@ -45,7 +45,7 @@ export const Div = style.div`
   display: ${props => props.inlineBlock ? 'inline-block' : props.flex ? 'flex' : 'block'};
   width: ${props => props.width ? props.width : null};
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     width: ${props => props.width ? props.width : '100%'};
   }
 `;

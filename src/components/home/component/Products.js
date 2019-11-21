@@ -20,7 +20,7 @@ const Product = (props) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
             <TitleTextArrow
-              title={"The best hens"}
+              title={"Best hens"}
               text={"Lorem ipsum dolor sit amet, consetue ipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris."}
               arrow={true}
               bgColor={"blue"}

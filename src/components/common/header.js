@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import { TinyButton as ScrollUpButton } from "react-scroll-up-button";
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -97,6 +98,8 @@ const Header = (props) => {
   const [mobileView, setMobileView] = useState(false);
   const classes = useStyles();
 
+  const { pathname = "" } = props.location;
+
   return (
     <div>
       <div className={classes.navigationMenuBar} onClick={() => setMobileView(!mobileView)}>
@@ -112,19 +115,29 @@ const Header = (props) => {
             <Link to="/">Logo</Link>
           </li>
           <li onClick={() => setActiveMenu('home')}>
-            <Link style={activeMenu.toLocaleLowerCase() === 'home' ? { color: 'red' } : {}} to="/">HOME</Link>
+            <Link
+              style={pathname === '/' ? { color: 'red' } : {}}
+              to="/">HOME</Link>
           </li>
           <li onClick={() => setActiveMenu('about')}>
-            <Link style={activeMenu.toLocaleLowerCase() === 'about' ? { color: 'red' } : {}} to="/about">ABOUT</Link>
-          </li>
-          <li onClick={() => setActiveMenu('services')}>
-            <Link style={activeMenu.toLocaleLowerCase() === 'services' ? { color: 'red' } : {}} to="/services">SERVICES</Link>
+            <Link 
+            style={pathname === '/about' ? { color: 'red' } : {}}
+            to="/about">ABOUT</Link>
           </li>
           <li onClick={() => setActiveMenu('products')}>
-            <Link style={activeMenu.toLocaleLowerCase() === 'products' ? { color: 'red' } : {}} to="/products">PRODUCTS</Link>
+            <Link
+              style={pathname === '/products' ? { color: 'red' } : {}}
+              to="/products">PRODUCTS</Link>
           </li>
           <li onClick={() => setActiveMenu('contact')}>
-            <Link style={activeMenu.toLocaleLowerCase() === 'contact' ? { color: 'red' } : {}} to="/contact">CONTACT</Link>
+            <Link
+              style={pathname === '/contact' ? { color: 'red' } : {}}
+              to="/contact">CONTACT</Link>
+          </li>
+          <li onClick={() => setActiveMenu('blog')}>
+            <Link
+              style={pathname === '/blog' ? { color: 'red' } : {}}
+              to="/blog">BLOG</Link>
           </li>
         </ul>
       </div>
@@ -138,4 +151,4 @@ const Header = (props) => {
     </div>
   )
 }
-export default Header
+export default withRouter(Header)

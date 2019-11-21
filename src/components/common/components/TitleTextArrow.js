@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     padding: '30px 35px 30px 35px',
     color: '#fff',
-    height: 150,
+    minHeight: 150,
     [theme.breakpoints.down('md')]: {
       padding: '30px 10px',
       height: 'auto',
