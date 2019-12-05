@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { WrapperDiv } from 'components/common/commonStyle'
+import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import Title from 'components/common/components/Title'
 import ImageTitleTextButton from 'components/common/components/ImageTitleTextButton'
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,11 +12,6 @@ import { OrangeButton } from 'components/common/components/Button'
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  maindiv: {
-    padding: '100px 0px 0px 0px',
-    width: '100%',
-    background: '#f0f0f0',
-  },
   fadedTextColor: {
     color: '#7c7c7c'
   },
@@ -74,41 +69,39 @@ const LatestPost = ({ recentPost = {} }) => {
   const classes = useStyles();
   return (
 
-    <div className={classes.maindiv}>
-      <WrapperDiv>
-        <Title text={"Newsroom"} padding="0px 0px 24px 0px" />
-        <div
-          className={classes.recentPost}
-          style={{
-            backgroundImage: 'url("https://dummyimage.com/1200x500/cccccc/000.jpg")',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '100% 100%',
-            minHeight: '500px',
-          }}
-        >
-          {/* Post wrapper */}
-          <div className={classes.recentPostWrapper}>
-            <div className={classes.item}>
-              {
-                /* title */
-                <Typography className={classes.ServicesH3} variant="p">
-                  {recentPost.title}
-                  <br />
-                  <span className={classes.dateSpan}>
-                    {moment(recentPost.created_on).format('LL')}
-                  </span>
-                </Typography>
-              }
-              {/* text */}
-              <p className={classes.serviceTextColor}>
-                {recentPost.post_content}
-              </p>
-              <OrangeButton className={classes.readMoreButton}>READ MORE</OrangeButton>
-            </div>
+    <ComponentWrapper>
+      <Title text={"Newsroom"} padding="0px 0px 24px 0px" />
+      <div
+        className={classes.recentPost}
+        style={{
+          backgroundImage: 'url("https://dummyimage.com/1200x500/cccccc/000.jpg")',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          minHeight: '500px',
+        }}
+      >
+        {/* Post wrapper */}
+        <div className={classes.recentPostWrapper}>
+          <div className={classes.item}>
+            {
+              /* title */
+              <Typography className={classes.ServicesH3} variant="p">
+                {recentPost.title}
+                <br />
+                <span className={classes.dateSpan}>
+                  {moment(recentPost.created_on).format('LL')}
+                </span>
+              </Typography>
+            }
+            {/* text */}
+            <p className={classes.serviceTextColor}>
+              {recentPost.post_content}
+            </p>
+            <OrangeButton className={classes.readMoreButton}>READ MORE</OrangeButton>
           </div>
         </div>
-      </WrapperDiv>
-    </div>
+      </div>
+    </ComponentWrapper>
   )
 }
 LatestPost.propTypes = {

@@ -6,7 +6,7 @@ import { routerMiddleware, ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history'
 
-import createRootReducer from 'store/reducers'
+import rootReducer from 'store/reducers'
 import saga from 'store/sagas'
 import './index.css';
 import App from './App';
@@ -19,7 +19,7 @@ const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  createRootReducer(history), // root reducer with router state
+  rootReducer(history), // root reducer with router state
   composeEnhancers(
     applyMiddleware(
       routerMiddleware(history), // for dispatching history actions

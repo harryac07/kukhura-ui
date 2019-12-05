@@ -23,6 +23,7 @@ const useStyles = makeStyles(({
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
     minHeight: '250px',
+    maxHeight: 'auto'
   },
   serviceTextColor: {
     color: '#7c7c7c'
@@ -33,7 +34,7 @@ const useStyles = makeStyles(({
 }));
 
 const ImageTitleTextButton = (props) => {
-  const { bgImageUrl = "", title, titleDom, text, textBgColor, button, buttonText, textDom, styleProps={} } = props;
+  const { bgImageUrl = "", title, titleDom, text, textBgColor, button, buttonText, textDom, styleProps = {}, onButtonClick } = props;
   const classes = useStyles(
     {
       bgImageUrl: `url("${bgImageUrl}")`,
@@ -62,7 +63,12 @@ const ImageTitleTextButton = (props) => {
         {
           /* button */
           button
-            ? <OrangeButton className={classes.readMoreButton}>{buttonText}</OrangeButton>
+            ? <OrangeButton
+              className={classes.readMoreButton}
+              onClick={onButtonClick}
+            >
+              {buttonText}
+            </OrangeButton>
             : null
         }
       </div>
@@ -77,6 +83,7 @@ ImageTitleTextButton.propTypes = {
   textBgColor: PropTypes.string,
   button: PropTypes.bool,
   buttonText: PropTypes.string,
+  onButtonClick: PropTypes.func,
   styleProps: PropTypes.object
 };
 export default ImageTitleTextButton;

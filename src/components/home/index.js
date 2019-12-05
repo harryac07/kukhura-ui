@@ -34,7 +34,6 @@ class Home extends Component {
     this.props.test();
   }
   render() {
-    console.log(this.props.home);
     return (
       <div>
         {/* Hero Carousel */}
@@ -70,7 +69,8 @@ class Home extends Component {
 }
 const mapStateToProps = state => {
   return {
-    home: state.home
+    home: state.home,
+    router: state.router
   };
 };
 

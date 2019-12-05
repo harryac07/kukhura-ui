@@ -7,15 +7,16 @@ const useStyles = makeStyles(theme => ({
   maindiv: {
     padding: '100px 0px',
     width: '100%',
-    background: '#f0f0f0',
+    background: props => props.backgroundColor ? props.backgroundColor : '#fff',
+    color: props => props.color
   },
 }));
 /**
  * ComponentWrapper
  * @param {node}children - children node
  */
-const ComponentWrapper = ({ children }) => {
-  const classes = useStyles();
+const ComponentWrapper = ({ children, backgroundColor, color }) => {
+  const classes = useStyles({ backgroundColor, color });
   return (
     <div className={classes.maindiv}>
       <WrapperDiv>

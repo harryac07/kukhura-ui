@@ -12,40 +12,30 @@ import About from './components/about';
 import Products from './components/products';
 import Contact from './components/contact';
 import Blog from './components/blog';
+import BlogPostDetail from './components/blogDetail';
 
 import Header from './components/common/header'
 import Footer from './components/common/footer'
 
 function App() {
   return (
-    <Router>
-      <div>
-        {/* navigation */}
-        <Header />
+    <div>
+      {/* navigation */}
+      <Header />
+      {/* router */}
+      <Switch>
+        <Route exact path="/" render={(routerProps) => <Home {...routerProps} />} />
+        <Route path="/about" render={(routerProps) => <About {...routerProps} />} />
+        <Route path="/products" render={(routerProps) => <Products {...routerProps} />} />
+        <Route path="/contact" render={(routerProps) => <Contact {...routerProps} />} />
+        <Route path="/blog/:id" render={(routerProps) => <BlogPostDetail {...routerProps} />} />
+        <Route path="/blog" render={(routerProps) => <Blog {...routerProps} />} />
 
-        {/* router */}
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/blog">
-            <Blog />
-          </Route>
-        </Switch>
+      </Switch>
 
-        {/* Footer */}
-        <Footer />
-      </div>
-    </Router>
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
 

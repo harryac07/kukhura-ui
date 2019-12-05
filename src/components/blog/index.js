@@ -43,7 +43,8 @@ class Blog extends Component {
 }
 const mapStateToProps = state => {
   return {
-    blog: state.blog
+    blog: state.blog,
+    router: state.router
   };
 };
 

@@ -1,17 +1,9 @@
 import React from 'react'
-import { WrapperDiv } from 'components/common/commonStyle'
+import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import Title from 'components/common/components/Title'
-import { makeStyles } from '@material-ui/core/styles';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css'
 
-const useStyles = makeStyles(theme => ({
-  maindiv: {
-    padding: '100px 0px',
-    width: '100%',
-    background: '#fff',
-  }
-}));
 
 const images = [
   {
@@ -54,23 +46,20 @@ const images = [
 ];
 
 const Gallery = (props) => {
-  const classes = useStyles();
   return (
-    <div className={classes.maindiv}>
-      <WrapperDiv>
-        <Title text={"Gallery"} padding={"0px 0px 24px 0px"} />
-        <ImageGallery
-          items={images}
-          showPlayButton={false}
-          autoPlay={true}
-          showBullets={false}
-          showThumbnails={true}
-          showFullscreenButton={false}
-          thumbnailPosition={'right'}
-          slideOnThumbnailOver={true}
-        />
-      </WrapperDiv>
-    </div >
+    <ComponentWrapper>
+      <Title text={"Gallery"} padding={"0px 0px 24px 0px"} />
+      <ImageGallery
+        items={images}
+        showPlayButton={false}
+        autoPlay={true}
+        showBullets={false}
+        showThumbnails={true}
+        showFullscreenButton={false}
+        thumbnailPosition={'right'}
+        slideOnThumbnailOver={true}
+      />
+    </ComponentWrapper>
   )
 }
 export default Gallery

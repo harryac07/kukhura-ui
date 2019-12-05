@@ -4,7 +4,7 @@ import { styled, ThemeProvider } from '@material-ui/styles';
 export const OrangeButton = styled(Button)({
   backgroundColor: props => props.bgColor ? props.bgColor : '#f65314',
   padding: props => props.padding ? props.padding : '18px 25px',
-  display: 'inline',
+  display: props => props.display ? props.display : 'inline',
   color: '#fff',
   fontWeight: 300,
   borderRadius: 0,

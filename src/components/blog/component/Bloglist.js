@@ -1,11 +1,12 @@
 import React from 'react'
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
+import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import ImageTitleTextButton from 'components/common/components/ImageTitleTextButton'
 import { makeStyles } from '@material-ui/core/styles';
 import { OrangeButton } from 'components/common/components/Button'
 import Grid from '@material-ui/core/Grid';
-import { Link } from '@material-ui/core';
+// import { Link } from '@material-ui/core';
 import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
@@ -27,10 +28,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BlogList = ({ blogList, loadMoreBlogPosts }) => {
+const BlogList = ({ blogList, loadMoreBlogPosts, history }) => {
   const classes = useStyles();
   return (
-    <ComponentWrapper>
+    <ComponentWrapper backgroundColor="#f0f0f0">
       <Grid container spacing={3}>
         {
           /* Render Blog Post Dynamically */
@@ -39,7 +40,7 @@ const BlogList = ({ blogList, loadMoreBlogPosts }) => {
               <Grid item xs={12} sm={3} key={each.id}>
                 <ImageTitleTextButton
                   bgImageUrl={each.post_image_url}
-                  titleDom={<Link href="#">{each.title}</Link>}
+                  titleDom={<Link to={'/blog/' + each.id}>{each.title}</Link>}
                   textDom={
                     <div>
                       <p className={classes.blackTextColor}>
