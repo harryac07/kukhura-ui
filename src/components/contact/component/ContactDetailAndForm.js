@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   maindiv: {
     padding: '100px 0px',
     width: '100%',
-    background: '#f0f0f0'
+    background: '#fff'
   },
   paraColor: {
     color: '#7c7c7c'
@@ -64,7 +64,7 @@ const ContactForm = (props) => {
       <WrapperDiv>
         <Grid container spacing={3}>
           {/* Address Grid */}
-          <Grid item xs={12} sm={4} md={4}>
+          <Grid item xs={12} sm={3} md={3}>
             <Title fontSize={"28px"} text={"Contact Info"} padding={"0px 0px 24px 0px"} />
             <Typography variant="paragraph" display="block">
               8901 Marmora Road,
@@ -80,7 +80,7 @@ const ContactForm = (props) => {
           </Grid>
 
           {/* Form Grid */}
-          <Grid item xs={12} sm={8} md={8}>
+          <Grid item xs={12} sm={9} md={9}>
             <Title fontSize={"28px"} text={"Give us a feedback"} padding={"0px 0px 24px 0px"} />
             <form className={classes.form} noValidate autoComplete="off" onSubmit={e => handleSubmit(e)}>
               <FormControl>

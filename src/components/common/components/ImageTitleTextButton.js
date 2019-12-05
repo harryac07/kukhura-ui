@@ -33,7 +33,7 @@ const useStyles = makeStyles(({
 }));
 
 const ImageTitleTextButton = (props) => {
-  const { bgImageUrl = "", title, text, textBgColor, button, buttonText, textDom } = props;
+  const { bgImageUrl = "", title, titleDom, text, textBgColor, button, buttonText, textDom, styleProps={} } = props;
   const classes = useStyles(
     {
       bgImageUrl: `url("${bgImageUrl}")`,
@@ -41,18 +41,20 @@ const ImageTitleTextButton = (props) => {
     }
   );
   return (
-    <div>
+    <div style={styleProps}>
       {
         /* image background */
         bgImageUrl
           ? <div className={classes.backgroundImage} />
           : null
       }
-      {/* title */}
       <div className={classes.item}>
-        <Typography className={classes.ServicesH3} variant="p">
-          {title}
-        </Typography>
+        {
+          /* title */
+          <Typography className={classes.ServicesH3} variant="p">
+            {title || titleDom}
+          </Typography>
+        }
         {/* text */}
         <p className={classes.serviceTextColor}>
           {text || textDom}
@@ -70,9 +72,11 @@ const ImageTitleTextButton = (props) => {
 ImageTitleTextButton.propTypes = {
   bgImageUrl: PropTypes.string,
   title: PropTypes.string,
+  titleDom: PropTypes.node,
   text: PropTypes.string,
   textBgColor: PropTypes.string,
   button: PropTypes.bool,
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  styleProps: PropTypes.object
 };
 export default ImageTitleTextButton;

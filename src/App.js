@@ -11,6 +11,7 @@ import Home from './components/home';
 import About from './components/about';
 import Products from './components/products';
 import Contact from './components/contact';
+import Blog from './components/blog';
 
 import Header from './components/common/header'
 import Footer from './components/common/footer'
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/contact">
             <Contact />
+          </Route>
+          <Route path="/blog">
+            <Blog />
           </Route>
         </Switch>
 
