@@ -12,25 +12,25 @@ const fetchBlogList = ({ pageOffsetEnd }) => {
   const fakeData = [
     {
       id: '1',
-      title: 'VESTIBULUM ANTE IPSUM PRIMIS',
-      created_on: '2019-11-26 00:00:00',
-      post_content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris.',
+      title: 'ULUM MOLESTIE LACUS AENEAN NOMY HENDRERIT MAURIS PHASELLUS PORTA FUSCE SUSCIPIT',
+      created_on: '2019-11-27 00:00:00',
+      post_content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris.',
       post_image_url: 'https://dummyimage.com/250x250/cccccc/000.jpg',
-      post_author: 'Hari Adhikari'
+      post_author: 'Hari Ac'
     }, {
       id: '2',
-      title: 'VESTIBULUM ANTE IPSUM PRIMIS',
+      title: 'ULUM MOLESTIE LACUS AENEAN NOMY HENDRERIT MAURIS PHASELLUS PORTA FUSCE SUSCIPIT',
       created_on: '2019-11-26 00:00:00',
-      post_content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris.',
+      post_content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris.',
       post_image_url: 'https://dummyimage.com/250x250/cccccc/000.jpg',
-      post_author: 'Hari Adhikari'
+      post_author: 'Hari Keto'
     }, {
       id: '3',
-      title: 'VESTIBULUM ANTE IPSUM PRIMIS',
+      title: 'ULUM MOLESTIE LACUS AENEAN NOMY HENDRERIT MAURIS PHASELLUS PORTA FUSCE SUSCIPIT',
       created_on: '2019-11-26 00:00:00',
-      post_content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris.',
+      post_content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris.',
       post_image_url: 'https://dummyimage.com/250x250/cccccc/000.jpg',
-      post_author: 'Hari Adhikari'
+      post_author: 'Hurriee Bhaii'
     }, {
       id: '4',
       title: 'VESTIBULUM ANTE IPSUM PRIMIS',

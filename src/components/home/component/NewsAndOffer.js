@@ -4,6 +4,8 @@ import { StyledLink } from 'components/common/components/Link'
 import Title from 'components/common/components/Title'
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
+import moment from 'moment';
+import { truncate } from 'lodash';
 
 const useStyles = makeStyles(theme => ({
   textBold: {
@@ -11,7 +13,6 @@ const useStyles = makeStyles(theme => ({
   },
   item: {
     position: 'relative',
-    // borderRadius: 10,
     padding: '30px 0px 0px 0px',
     minHeight: 150,
     background: '#fff',
@@ -23,51 +24,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const NewsAndOffer = (props) => {
+const NewsAndOffer = ({ recentPosts }) => {
   const classes = useStyles();
   return (
     <ComponentWrapper>
       <Title text={"News and offers"} />
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={4}>
-          <div className={classes.item}>
-            <StyledLink to={"#"}>
-              <Typography className={classes.textBold} variant="p">
-                ULUM MOLESTIE LACUS AENEAN NOMY HENDRERIT MAURIS PHASELLUS PORTA FUSCE SUSCIPIT
-              </Typography>
-            </StyledLink>
-            <p>26/07/2019</p>
-            <p className={classes.serviceTextColor}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat
-              </p>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <div className={classes.item}>
-            <StyledLink to={"#"}>
-              <Typography className={classes.textBold} variant="p">
-                ULUM MOLESTIE LACUS AENEAN NOMY HENDRERIT MAURIS PHASELLUS PORTA FUSCE SUSCIPIT
-              </Typography>
-            </StyledLink>
-            <p>26/07/2019</p>
-            <p className={classes.serviceTextColor}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat
-              </p>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <div className={classes.item}>
-            <StyledLink to={"#"}>
-              <Typography className={classes.textBold} variant="p">
-                ULUM MOLESTIE LACUS AENEAN NOMY HENDRERIT MAURIS PHASELLUS PORTA FUSCE SUSCIPIT
-              </Typography>
-            </StyledLink>
-            <p>26/07/2019</p>
-            <p className={classes.serviceTextColor}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat
-              </p>
-          </div>
-        </Grid>
+        {
+          /* Loop through recent posts */
+          recentPosts.map(each => {
+            return (
+              <Grid item xs={12} sm={4} key={each.id}>
+                <div className={classes.item}>
+                  <StyledLink to={'/blog/' + each.id}>
+                    <Typography className={classes.textBold} variant="p">
+                      {each.title.toUpperCase()}
+                    </Typography>
+                  </StyledLink>
+                  <p>{moment(each.created_on).format('LL')}</p>
+                  <p className={classes.serviceTextColor}>
+                    {
+                      truncate(each.post_content||"", {
+                        'length': 150,
+                      })
+                    }
+                  </p>
+                </div>
+              </Grid>
+            );
+          })
+        }
       </Grid>
     </ComponentWrapper>
   )

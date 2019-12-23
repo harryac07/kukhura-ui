@@ -12,7 +12,7 @@ import Gallery from './component/Gallery'
 import { Divider } from 'components/common/components/Divider'
 import SloganBanner from 'components/common/components/SloganBanner'
 
-import { test } from './action'
+import { test, getRecentPosts } from './action'
 
 const SloganDiv = styled.div`
   background-image: url("https://dummyimage.com/1200x300/cccccc/000.jpg");
@@ -32,8 +32,10 @@ class Home extends Component {
   componentDidMount() {
     // dispatch action
     this.props.test();
+    this.props.getRecentPosts();
   }
   render() {
+    const { recentPosts } = this.props.home;
     return (
       <div>
         {/* Hero Carousel */}
@@ -56,8 +58,8 @@ class Home extends Component {
           textSizeLevel={2}
         />
 
-        {/* News and offers */}
-        <NewsAndOffer />
+        {/* News/Posts and offers */}
+        <NewsAndOffer recentPosts={recentPosts} />
         <Divider />
 
         {/* Our gallery */}
@@ -75,7 +77,8 @@ const mapStateToProps = state => {
 };
 
 const withConnect = connect(mapStateToProps, {
-  test
+  test,
+  getRecentPosts
 });
 
 

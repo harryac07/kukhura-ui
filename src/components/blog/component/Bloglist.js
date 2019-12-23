@@ -6,8 +6,9 @@ import ImageTitleTextButton from 'components/common/components/ImageTitleTextBut
 import { makeStyles } from '@material-ui/core/styles';
 import { OrangeButton } from 'components/common/components/Button'
 import Grid from '@material-ui/core/Grid';
-// import { Link } from '@material-ui/core';
+import { StyledLink } from 'components/common/components/Link'
 import moment from 'moment';
+import { truncate } from 'lodash';
 
 const useStyles = makeStyles(theme => ({
   fadedTextColor: {
@@ -40,14 +41,18 @@ const BlogList = ({ blogList, loadMoreBlogPosts, history }) => {
               <Grid item xs={12} sm={3} key={each.id}>
                 <ImageTitleTextButton
                   bgImageUrl={each.post_image_url}
-                  titleDom={<Link to={'/blog/' + each.id}>{each.title}</Link>}
+                  titleDom={<StyledLink to={'/blog/' + each.id}>{each.title}</StyledLink>}
                   textDom={
                     <div>
                       <p className={classes.blackTextColor}>
                         {moment(each.created_on).format('LL')}
                       </p>
                       <p className={classes.fadedTextColor}>
-                        {each.post_content}
+                        {
+                          truncate(each.post_content || "", {
+                            'length': 150,
+                          })
+                        }
                       </p>
                     </div>
                   }

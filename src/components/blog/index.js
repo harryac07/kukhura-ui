@@ -23,10 +23,11 @@ class Blog extends Component {
   }
   render() {
     const { blogList } = this.props.blog;
+    const { history } = this.props;
     return (
       <div>
         {/* Recent post */}
-        <LatestPost recentPost={blogList[0]} />
+        <LatestPost recentPost={blogList[0]} history={history} />
         {/* Newsroom bloglist */}
         <Bloglist blogList={blogList} loadMoreBlogPosts={this.loadMoreBlogPosts} />
         <Divider />

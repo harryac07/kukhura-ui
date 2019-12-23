@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { Link } from '@material-ui/core';
 import { OrangeButton } from 'components/common/components/Button'
 import { Typography } from '@material-ui/core';
+import { truncate } from 'lodash';
 
 const useStyles = makeStyles(theme => ({
   fadedTextColor: {
@@ -65,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LatestPost = ({ recentPost = {} }) => {
+const LatestPost = ({ recentPost = {}, history }) => {
   const classes = useStyles();
   return (
 
@@ -86,7 +87,7 @@ const LatestPost = ({ recentPost = {} }) => {
             {
               /* title */
               <Typography className={classes.ServicesH3} variant="p">
-                {recentPost.title}
+                <StyledLink to={`/blog/${recentPost.id}`}>{recentPost.title}</StyledLink>
                 <br />
                 <span className={classes.dateSpan}>
                   {moment(recentPost.created_on).format('LL')}
@@ -95,9 +96,18 @@ const LatestPost = ({ recentPost = {} }) => {
             }
             {/* text */}
             <p className={classes.serviceTextColor}>
-              {recentPost.post_content}
+              {
+                truncate(recentPost.post_content || "", {
+                  'length': 350,
+                })
+              }
             </p>
-            <OrangeButton className={classes.readMoreButton}>READ MORE</OrangeButton>
+            <OrangeButton
+              className={classes.readMoreButton}
+              onClick={() => history.push('/blog/' + recentPost.id)}
+            >
+              READ MORE
+            </OrangeButton>
           </div>
         </div>
       </div>
