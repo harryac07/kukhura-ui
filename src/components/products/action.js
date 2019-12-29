@@ -1,6 +1,6 @@
 import { GET_PRODUCTS } from './constant'
 
-export const test = () => {
+export const getProducts = () => {
   return {
     type: GET_PRODUCTS
   }

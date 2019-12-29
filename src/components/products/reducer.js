@@ -2,7 +2,7 @@ import { GET_PRODUCTS, GET_PRODUCTS_SUCCEED } from './constant'
 
 const initialState = {
     loading: false,
-    hero_product: {},
+    hero_product: [],
     products: []
 }
 const productReducer = (state = initialState, action) => {
@@ -15,7 +15,8 @@ const productReducer = (state = initialState, action) => {
         case GET_PRODUCTS_SUCCEED:
             return {
                 ...state,
-                products: action.payload,
+                products: action.payload.results,
+                hero_product : action.payload.results.filter(each=>each.hero_product),
                 loading: false
             }
         default:
