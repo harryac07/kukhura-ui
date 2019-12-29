@@ -15,8 +15,8 @@ const productReducer = (state = initialState, action) => {
         case GET_PRODUCTS_SUCCEED:
             return {
                 ...state,
-                products: action.payload.results,
-                hero_product : action.payload.results.filter(each=>each.hero_product),
+                products: action.payload,
+                hero_product : action.payload.filter(each=>each.hero_product),
                 loading: false
             }
         default:
