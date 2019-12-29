@@ -90,10 +90,21 @@ const useStyles = makeStyles(theme => ({
             cursor: 'pointer',
         },
     },
-    logoImage:{
+    logoImage: {
         height: '80px',
         position: 'absolute',
         top: 10,
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        },
+    },
+    logoDot: {
+        position: 'absolute',
+        top: 25,
+        left: 90,
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#7c7c7c',
         [theme.breakpoints.down('sm')]: {
             display: 'none'
         },
@@ -122,18 +133,11 @@ const Header = (props) => {
                     <li className="logo" onClick={() => setActiveMenu('home')} >
                         <Link to="/">
                             <img
-                                className={classes.logoImage} 
-                                src={imageLogo}/>
-                                <span
-                                    style={{
-                                        position: 'absolute',
-                                        top: 25,
-                                        left: 90,
-                                        fontSize: 40,
-                                        fontWeight: 'bold',
-                                        color: '#7c7c7c'
-                                    }}
-                                >.</span>
+                                className={classes.logoImage}
+                                src={imageLogo} />
+                            <span
+                                className={classes.logoDot}
+                            >.</span>
                         </Link>
                     </li>
                     <li onClick={() => setActiveMenu('home')}>
