@@ -19,7 +19,7 @@ class BlogDetail extends Component {
     const { blogDetail } = this.props.blogDetail;
     return (
       <div>
-        <BlogPostDetail goBack={()=>this.props.history.goBack()} post={blogDetail[0]} />
+        <BlogPostDetail goBack={()=>this.props.history.goBack()} post={blogDetail} />
       </div>
     )
   }
