@@ -25,7 +25,6 @@ class Blog extends Component {
     }
     render() {
         const { blogList, blogPaginationEndOffset, heroBlogPost } = this.props.blog;
-        console.log(blogList)
         const { history } = this.props;
         return (
             <div>
