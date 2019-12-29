@@ -5,6 +5,7 @@ export const OrangeButton = styled(Button)({
   backgroundColor: props => props.bgColor ? props.bgColor : '#f65314',
   padding: props => props.padding ? props.padding : '18px 25px',
   display: props => props.display ? props.display : 'inline',
+  width: props => props.width ? props.width : null,
   color: '#fff',
   fontWeight: 300,
   borderRadius: 0,

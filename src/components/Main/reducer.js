@@ -1,25 +1,24 @@
-import { GET_PRODUCTS, GET_PRODUCTS_SUCCEED } from './constant'
+import { FETCH_USER, FETCH_USER_SUCCEED } from './constant'
 
 const initialState = {
     loading: false,
-    hero_product: {},
-    products: []
+    current_user: []
 }
-const productReducer = (state = initialState, action) => {
+const AppReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_PRODUCTS:
+        case FETCH_USER:
             return {
                 ...state,
                 loading: true
             }
-        case GET_PRODUCTS_SUCCEED:
+        case FETCH_USER_SUCCEED:
             return {
                 ...state,
-                products: action.payload,
+                current_user: action.payload,
                 loading: false
             }
         default:
             return state;
     }
 }
-export default productReducer
+export default AppReducer

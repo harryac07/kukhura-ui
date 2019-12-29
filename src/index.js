@@ -9,7 +9,7 @@ import { createBrowserHistory } from 'history'
 import rootReducer from 'store/reducers'
 import saga from 'store/sagas'
 import './index.css';
-import App from './App';
+import App from 'components/Main';
 import * as serviceWorker from './serviceWorker';
 
 const history = createBrowserHistory()

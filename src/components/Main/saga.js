@@ -3,35 +3,36 @@ import axios from "axios"
 import { take } from "lodash"
 
 import {
-    GET_PRODUCTS,
-    GET_PRODUCTS_SUCCEED,
-    GET_PRODUCTS_FAILED
+    FETCH_USER,
+    FETCH_USER_SUCCEED,
+    FETCH_USER_FAILED
 } from "./constant"
+
 const API_URL = `http://localhost:8000/api`
 
-const fetchProducts = () => {
+const fetchCurrentUser = () => {
     return axios
-        .get(`${API_URL}/products/`)
+        .get(`${API_URL}/users/`)
         .then(response => {
             return response.data
         });
 };
-export function* fetchProductsSaga(action) {
+export function* fetchCurrentUserSaga(action) {
     try {
-        const data = yield call(fetchProducts);
-        console.log('products ', data)
+        const data = yield call(fetchCurrentUser);
+        console.log('users ', data)
         yield put({
-            type: GET_PRODUCTS_SUCCEED,
+            type: FETCH_USER_SUCCEED,
             payload: data
         });
     } catch (error) {
         yield put({
-            type: GET_PRODUCTS_FAILED,
+            type: FETCH_USER_FAILED,
             error: 'Something went wrong!'
         });
     }
 }
 
-export const productSaga = [
-    takeEvery(GET_PRODUCTS, fetchProductsSaga),
+export const appSaga = [
+    takeEvery(FETCH_USER, fetchCurrentUserSaga),
 ];
