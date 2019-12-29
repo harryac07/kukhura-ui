@@ -22,13 +22,10 @@ class Products extends Component {
         return (
             <div>
                 {/* OurProducts */}
-                <OurProducts
-                    allProducts={products}
-                    heroProduct={hero_product}
-                />
+                <OurProducts heroProduct={hero_product} />
 
                 {/* organic Eggs */}
-                <EggsAndChiken />
+                <EggsAndChiken allProducts={products} />
                 <Divider />
 
                 {/* Slogan banner */}

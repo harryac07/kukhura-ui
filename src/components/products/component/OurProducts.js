@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 const OurProducts = (props) => {
     const classes = useStyles();
     const [showMoreHeroProduct, onShowMoreHeroProductChange] = useState(false);
-    const { allProducts, heroProduct } = props;
+    const { heroProduct } = props;
     const { title = "", description = "" } = heroProduct[0] || {};
 
     return (
@@ -55,7 +55,7 @@ const OurProducts = (props) => {
                                     padding="10px 10px"
                                     className={classes.readMoreButton}
                                 >
-                                {!showMoreHeroProduct ? 'Show more' : 'Show less'}
+                                    {!showMoreHeroProduct ? 'Show more' : 'Show less'}
                                 </OrangeButton>
                                 : null
                         }
