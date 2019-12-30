@@ -90,7 +90,7 @@ const BlogPostDetail = ({ post = {} }) => {
                     color={"action"}
                     className={classes.backIcon}
                 />
-                <span style={{ marginLeft: 10 }}>Back</span>
+                <span style={{ marginLeft: 10 }}>View all posts</span>
             </Link>
             <br />
             <Grid container spacing={3}>
