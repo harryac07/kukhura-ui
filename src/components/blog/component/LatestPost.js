@@ -95,9 +95,8 @@ const LatestPost = ({ recentPost = {}, history, addSelectedBlogDetail }) => {
                         {
                             /* title */
                             <Typography className={classes.ServicesH3} variant="p">
-                                <StyledLink onClick={() => {
+                                <StyledLink to={`/blog/${id}`} onClick={() => {
                                     addSelectedBlogDetail(recentPost);
-                                    history.push(`/blog/${id}`);
                                 }}>
                                     {title.toUpperCase()}
                                 </StyledLink>
@@ -117,7 +116,10 @@ const LatestPost = ({ recentPost = {}, history, addSelectedBlogDetail }) => {
                         </p>
                         <OrangeButton
                             className={classes.readMoreButton}
-                            onClick={() => history.push('/blog/' + id)}
+                            onClick={() => {
+                                addSelectedBlogDetail(recentPost);
+                                history.push('/blog/' + id);
+                            }}
                         >
                             READ MORE
             </OrangeButton>

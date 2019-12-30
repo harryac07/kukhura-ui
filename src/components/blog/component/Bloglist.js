@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 const BlogList = ({
     blogList,
     loadMoreBlogPosts,
-    history,
     isMoreBlog,
     addSelectedBlogDetail
 }) => {
@@ -80,9 +79,8 @@ const BlogList = ({
                                 <ImageTitleTextButton
                                     bgImageUrl={post_primary_image}
                                     titleDom={
-                                        <StyledLink onClick={() => {
+                                        <StyledLink to={`/blog/${id}`} onClick={() => {
                                             addSelectedBlogDetail(each);
-                                            history.push(`/blog/${id}`);
                                         }}>
                                             {
                                                 truncate(title.toUpperCase() || "", {
