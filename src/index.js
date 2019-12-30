@@ -12,6 +12,9 @@ import './index.css';
 import App from 'components/Main';
 import * as serviceWorker from './serviceWorker';
 
+/* react loader spinner CSS */
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+
 const history = createBrowserHistory()
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()

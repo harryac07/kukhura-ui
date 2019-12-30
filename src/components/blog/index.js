@@ -7,6 +7,7 @@ import Bloglist from './component/Bloglist'
 import LatestPost from './component/LatestPost'
 import { Divider } from 'components/common/components/Divider'
 import SloganBanner from 'components/common/components/SloganBanner'
+import Loader from 'components/common/components/CommonLoader'
 
 import { fetchBlogList } from './action'
 
@@ -26,6 +27,9 @@ class Blog extends Component {
     render() {
         const { blogList, blogPaginationEndOffset, heroBlogPost } = this.props.blog;
         const { history } = this.props;
+        if (blogList.length === 0) {
+            return <Loader showLoader={true} />
+        }
         return (
             <div>
                 {/* Recent post */}

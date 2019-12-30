@@ -18,6 +18,7 @@ import BlogPostDetail from 'components/blogDetail';
 
 import Header from 'components/common/header'
 import Footer from 'components/common/footer'
+import ScrollToTop from 'components/common/components/ScrollToTop'
 
 import { fetchCurrentUser } from './action'
 
@@ -33,6 +34,10 @@ class App extends Component {
             <div>
                 {/* navigation */}
                 < Header />
+
+                {/* Scroll to Top */}
+                <ScrollToTop />
+
                 {/* router */}
                 < Switch >
                     <Route exact path="/" render={(routerProps) => <Home {...routerProps} />} />

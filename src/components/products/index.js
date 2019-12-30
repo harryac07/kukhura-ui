@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { compose } from "redux";
 import { connect } from "react-redux";
 
-
+import Loader from 'components/common/components/CommonLoader'
 import OurProducts from './component/OurProducts'
 import EggsAndChiken from './component/EggsAndChicken'
 import { Divider } from 'components/common/components/Divider'
@@ -19,6 +19,9 @@ class Products extends Component {
     }
     render() {
         const { products, hero_product } = this.props.product;
+        if(products.length===0){
+            return <Loader showLoader />
+        }
         return (
             <div>
                 {/* OurProducts */}
