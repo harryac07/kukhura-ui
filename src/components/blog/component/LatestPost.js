@@ -63,10 +63,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const LatestPost = ({ recentPost = {}, history }) => {
+const LatestPost = ({ recentPost = {}, history, addSelectedBlogDetail }) => {
     const classes = useStyles();
     const {
-        id= "",
+        id = "",
         title = "",
         description = "",
         created = "",
@@ -74,7 +74,7 @@ const LatestPost = ({ recentPost = {}, history }) => {
         post_primary_image = "https://dummyimage.com/1200x500/cccccc/000.jpg",
     } = recentPost;
     if (!title) {
-        return <div/>
+        return <div />
     }
     return (
 
@@ -95,7 +95,11 @@ const LatestPost = ({ recentPost = {}, history }) => {
                         {
                             /* title */
                             <Typography className={classes.ServicesH3} variant="p">
-                                <StyledLink to={`/blog/${id}`}>                  {title.toUpperCase()}
+                                <StyledLink onClick={() => {
+                                    addSelectedBlogDetail(recentPost);
+                                    history.push(`/blog/${id}`);
+                                }}>
+                                    {title.toUpperCase()}
                                 </StyledLink>
                                 <br />
                                 <span className={classes.dateSpan}>
@@ -124,6 +128,7 @@ const LatestPost = ({ recentPost = {}, history }) => {
     )
 }
 LatestPost.propTypes = {
-    recentPost: PropTypes.object
+    recentPost: PropTypes.object,
+    addSelectedBlogDetail: PropTypes.func
 }
 export default LatestPost

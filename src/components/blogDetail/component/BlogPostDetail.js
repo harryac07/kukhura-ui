@@ -1,16 +1,13 @@
 import React from 'react'
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import PropTypes from 'prop-types';
-import ImageTitleTextButton from 'components/common/components/ImageTitleTextButton'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Link } from '@material-ui/core';
 import moment from 'moment';
 import { startCase } from 'lodash';
 import { Typography } from '@material-ui/core';
 import { KeyboardArrowLeft } from '@material-ui/icons';
-import { OrangeButton } from 'components/common/components/Button'
-
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     fadedTextColor: {
@@ -49,16 +46,28 @@ const useStyles = makeStyles(theme => ({
     },
     backIcon: {
         textAlign: 'center',
-        position: 'absolute',
+        position: 'relative',
         left: 0,
-        top: 5,
+        top: 7,
         [theme.breakpoints.down('md')]: {
-            top: 0,
+            top: 7,
+        },
+    },
+    backLink: {
+        textDecoration: 'none',
+        display: 'inline-block',
+        color: '#000',
+        position: 'relative',
+        padding: '0px 12px 10px 0px',
+        background: '#fff',
+        margin: '0px 0px 10px 0px',
+        '&:hover': {
+            color: '#f65314'
         },
     }
 }));
 
-const BlogPostDetail = ({ post = {}, goBack }) => {
+const BlogPostDetail = ({ post = {} }) => {
     const {
         id = "",
         title = "",
@@ -76,18 +85,13 @@ const BlogPostDetail = ({ post = {}, goBack }) => {
 
     return (
         <ComponentWrapper>
-            <OrangeButton
-                bgColor='gray'
-                padding="2px 12px"
-                display='block'
-                onClick={goBack}
-            >
+            <Link to={`/blog`} className={classes.backLink}>
                 <KeyboardArrowLeft
                     color={"action"}
                     className={classes.backIcon}
                 />
                 <span style={{ marginLeft: 10 }}>Back</span>
-            </OrangeButton>
+            </Link>
             <br />
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} key={id}>

@@ -12,8 +12,12 @@ class BlogDetail extends Component {
     }
     componentDidMount() {
         const { id } = this.props.match.params;
-        // Dispatch action
-        this.props.fetchBlogDetail(id);
+        const { blogDetail } = this.props.blogDetail;
+        /* Fetch only if not exists */
+        if (!blogDetail.id || (id != blogDetail.id)) {
+            // Dispatch action
+            this.props.fetchBlogDetail(id);
+        }
     }
 
     render() {
@@ -23,7 +27,7 @@ class BlogDetail extends Component {
         }
         return (
             <div>
-                <BlogPostDetail goBack={() => this.props.history.goBack()} post={blogDetail} />
+                <BlogPostDetail post={blogDetail} />
             </div>
         )
     }

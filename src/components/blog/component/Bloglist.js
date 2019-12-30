@@ -36,7 +36,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BlogList = ({ blogList, loadMoreBlogPosts, isMoreBlog }) => {
+const BlogList = ({
+    blogList,
+    loadMoreBlogPosts,
+    history,
+    isMoreBlog,
+    addSelectedBlogDetail
+}) => {
     const classes = useStyles();
     const timer = React.useRef();
 
@@ -47,7 +53,6 @@ const BlogList = ({ blogList, loadMoreBlogPosts, isMoreBlog }) => {
             clearTimeout(timer.current);
         };
     }, []);
-
 
     const handleCircularLoading = () => {
         setLoading(true);
@@ -75,7 +80,10 @@ const BlogList = ({ blogList, loadMoreBlogPosts, isMoreBlog }) => {
                                 <ImageTitleTextButton
                                     bgImageUrl={post_primary_image}
                                     titleDom={
-                                        <StyledLink to={'/blog/' + id}>
+                                        <StyledLink onClick={() => {
+                                            addSelectedBlogDetail(each);
+                                            history.push(`/blog/${id}`);
+                                        }}>
                                             {
                                                 truncate(title.toUpperCase() || "", {
                                                     'length': 100,
@@ -138,6 +146,7 @@ const BlogList = ({ blogList, loadMoreBlogPosts, isMoreBlog }) => {
 }
 BlogList.propTypes = {
     blogList: PropTypes.array,
-    isMoreBlog: PropTypes.bool
+    isMoreBlog: PropTypes.bool,
+    addSelectedBlogDetail: PropTypes.func,
 }
 export default BlogList

@@ -9,7 +9,7 @@ import { Divider } from 'components/common/components/Divider'
 import SloganBanner from 'components/common/components/SloganBanner'
 import Loader from 'components/common/components/CommonLoader'
 
-import { fetchBlogList } from './action'
+import { fetchBlogList, addSelectedBlogDetail } from './action'
 
 class Blog extends Component {
     constructor(props) {
@@ -36,12 +36,15 @@ class Blog extends Component {
                 <LatestPost
                     recentPost={heroBlogPost}
                     history={history}
+                    addSelectedBlogDetail={this.props.addSelectedBlogDetail}
                 />
                 {/* Newsroom bloglist */}
                 <Bloglist
                     blogList={take(blogList, blogPaginationEndOffset)}
                     loadMoreBlogPosts={this.loadMoreBlogPosts}
                     isMoreBlog={blogPaginationEndOffset < blogList.length}
+                    addSelectedBlogDetail={this.props.addSelectedBlogDetail}
+                    history={history}
                 />
                 <Divider />
 
@@ -64,5 +67,6 @@ const mapStateToProps = state => {
 
 const withConnect = connect(mapStateToProps, {
     fetchBlogList,
+    addSelectedBlogDetail
 });
 export default compose(withConnect)(Blog);
