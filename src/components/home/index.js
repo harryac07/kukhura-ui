@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { compose } from "redux";
 import { connect } from "react-redux";
 import styled from 'styled-components';
+import { take } from 'lodash'
 
 import HeroCarousel from './component/HeroCarousel'
 import WelcomeGreeting from './component/Welcome'
@@ -13,6 +14,9 @@ import { Divider } from 'components/common/components/Divider'
 import SloganBanner from 'components/common/components/SloganBanner'
 
 import { test, getRecentPosts } from './action'
+/* Actions from other components/views to load data initially */
+import { fetchBlogList } from 'components/blog/action';
+import { getProducts } from 'components/products/action'
 
 const SloganDiv = styled.div`
   background-image: url("https://dummyimage.com/1200x300/cccccc/000.jpg");
@@ -26,59 +30,74 @@ const SloganDiv = styled.div`
 `;
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    // dispatch action
-    this.props.test();
-    this.props.getRecentPosts();
-  }
-  render() {
-    const { recentPosts } = this.props.home;
-    return (
-      <div>
-        {/* Hero Carousel */}
-        <HeroCarousel />
+    constructor(props) {
+        super(props);
+    }
+    componentDidMount() {
+        // dispatch action
+        this.props.test();
+        this.props.getRecentPosts();
 
-        {/* Hello welcome */}
-        <WelcomeGreeting />
+        // dispatch action to load data initially
+        // check if data already and prevent refetch here
+        const { products, blogs } = this.props;
+        if (products.length === 0) {
+            this.props.getProducts();
+        }
+        if (blogs.length === 0) {
+            this.props.fetchBlogList();
+        }
 
-        {/* Product overview link */}
-        <Product />
-        <Divider />
+    }
+    render() {
+        return (
+            <div>
+                {/* Hero Carousel */}
+                <HeroCarousel />
 
-        {/* Services and Products */}
-        <Services />
+                {/* Hello welcome */}
+                <WelcomeGreeting />
 
-        {/* Slogan image background */}
-        <SloganBanner
-          bgImageUrl="https://dummyimage.com/1200x300/cccccc/000.jpg"
-          sloganText="An egg a day keeps the doctor away"
-          textSizeLevel={2}
-        />
+                {/* Product overview link */}
+                <Product />
+                <Divider />
 
-        {/* News/Posts and offers */}
-        <NewsAndOffer recentPosts={recentPosts} />
-        <Divider />
+                {/* Services and Products */}
+                <Services products={take(this.props.products, 3)} />
 
-        {/* Our gallery */}
-        <Gallery />
+                {/* Slogan image background */}
+                <SloganBanner
+                    bgImageUrl="https://dummyimage.com/1200x300/cccccc/000.jpg"
+                    sloganText="An egg a day keeps the doctor away"
+                    textSizeLevel={2}
+                />
 
-      </div>
-    )
-  }
+                {/* News/Posts and offers */}
+                <NewsAndOffer recentPosts={take(this.props.blogs, 3)} />
+                <Divider />
+
+                {/* Our gallery */}
+                <Gallery />
+
+            </div>
+        )
+    }
 }
 const mapStateToProps = state => {
-  return {
-    home: state.home,
-    router: state.router
-  };
+    return {
+        home: state.home,
+        router: state.router,
+        products: state.product.products,
+        blogs: state.blog.blogList,
+    };
 };
 
 const withConnect = connect(mapStateToProps, {
-  test,
-  getRecentPosts
+    test,
+    getRecentPosts,
+
+    fetchBlogList,
+    getProducts
 });
 
 
