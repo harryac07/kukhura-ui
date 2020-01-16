@@ -8,13 +8,13 @@ import Title from 'components/common/components/Title'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
+import { StyledLink } from 'components/common/components/Link'
 
 const useStyles = makeStyles(theme => ({
     subtitle: {
         fontWeight: 'bold',
         marginBottom: 20,
-        fontSize: 14,
-        color: '#000'
+        fontSize: 14
     },
     readMoreButton: {
         display: 'block',
@@ -28,20 +28,22 @@ const OurProducts = (props) => {
     const classes = useStyles();
     const [showMoreHeroProduct, onShowMoreHeroProductChange] = useState(false);
     const { heroProduct } = props;
-    const { title = "", description = "" } = heroProduct[0] || {};
+    const { id = "", title = "", description = "" } = heroProduct[0] || {};
 
     return (
         <ComponentWrapper color="#7c7c7c">
             <Title text={"Our products"} padding="0px 0px 24px 0px" />
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={12}>
-                    <Typography
-                        className={classes.subtitle}
-                        fontWeight="bold"
-                        variant="h6"
-                    >
-                        {title.toUpperCase()}
-                    </Typography>
+                    <StyledLink to={`/product/${id}`}>
+                        <Typography
+                            className={classes.subtitle}
+                            fontWeight="bold"
+                            variant="h6"
+                        >
+                            {title.toUpperCase()}
+                        </Typography>
+                    </StyledLink>
                     <Typography variant="p">
                         {
                             truncate(description || "", {
