@@ -67,30 +67,36 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BlogPostDetail = ({ post = {} }) => {
+const BlogPostDetail = ({ post = {}, postType = "blog" }) => {
     const {
         id = "",
         title = "",
         description = "",
-        author = "",
-        post_primary_image = "",
+        author = "Admin",
+        primary_image = "",
         created = "Admin",
         comments = []
     } = post;
     const classes = useStyles(
         {
-            bgImageUrl: `url("${post_primary_image}")`
+            bgImageUrl: `url("${primary_image}")`
         }
     );
+    const postTypesCategory = postType === 'product'
+        ? 'products'
+        : 'posts'
+    const goBackcategoryUrl = postType === 'product'
+        ? 'products'
+        : 'blog'
 
     return (
         <ComponentWrapper>
-            <Link to={`/blog`} className={classes.backLink}>
+            <Link to={`/${goBackcategoryUrl}`} className={classes.backLink}>
                 <KeyboardArrowLeft
                     color={"action"}
                     className={classes.backIcon}
                 />
-                <span style={{ marginLeft: 10 }}>View all posts</span>
+                <span style={{ marginLeft: 10 }}>View all {postTypesCategory}</span>
             </Link>
             <br />
             <Grid container spacing={3}>

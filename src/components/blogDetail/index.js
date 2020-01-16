@@ -22,12 +22,14 @@ class BlogDetail extends Component {
 
     render() {
         const { blogDetail, loading } = this.props.blogDetail;
+        const { 0: type, } = this.props.match.params;
+
         if (!blogDetail.id || loading) {
             return <Loader showLoader={true} />
         }
         return (
             <div>
-                <BlogPostDetail post={blogDetail} />
+                <BlogPostDetail post={blogDetail} postType={type} />
             </div>
         )
     }
