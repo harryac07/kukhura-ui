@@ -42,7 +42,7 @@ class App extends Component {
                     <Route path="/about" render={(routerProps) => <About {...routerProps} />} />
                     <Route path="/products" render={(routerProps) => <Products {...routerProps} />} />
                     <Route path="/contact" render={(routerProps) => <Contact {...routerProps} />} />
-                    <Route path="/blog/:id" render={(routerProps) => <BlogPostDetail {...routerProps} />} />
+                    <Route path="/(blog|product|service)/:id" render={(routerProps) => <BlogPostDetail {...routerProps} />} />
                     <Route path="/blog" render={(routerProps) => <Blog {...routerProps} />} />
                     <Route path="/(login|admin)" render={(routerProps) => <Login {...routerProps} />} />
                 </Switch >

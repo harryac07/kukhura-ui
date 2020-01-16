@@ -6,7 +6,7 @@ import Title from 'components/common/components/Title'
 import ImageTitleText from 'components/common/components/ImageTitleTextButton'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import { StyledLink } from 'components/common/components/Link'
 import { OrangeButton } from 'components/common/components/Button'
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +58,15 @@ const EggsAndChiken = (props) => {
                                 <Grid item xs={12} sm={4} key={id}>
                                     <ImageTitleText
                                         bgImageUrl={product_primary_image || undefined}
-                                        title={title.toUpperCase()}
+                                        titleDom={
+                                          <StyledLink to={`/product/${id}`}>
+                                              {
+                                                  truncate(title.toUpperCase() || "", {
+                                                      'length': 100,
+                                                  })
+                                              }
+                                          </StyledLink>
+                                      }
                                         text={
                                             truncate(description || "", {
                                                 'length': showMoreProduct ? description.length : 200,
