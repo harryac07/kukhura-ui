@@ -1,6 +1,7 @@
 import { call, put, takeLatest, takeEvery, all } from "redux-saga/effects";
 import axios from "axios"
 import { take } from "lodash"
+import { API_URL } from 'env'
 
 import {
   TEST_SUCCEED,

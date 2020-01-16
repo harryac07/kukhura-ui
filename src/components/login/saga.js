@@ -2,6 +2,7 @@ import { call, put, takeLatest, takeEvery, all } from "redux-saga/effects";
 import { createBrowserHistory } from 'history';
 import axios from "axios"
 import { take } from "lodash"
+import { API_URL } from 'env'
 
 import {
     FETCH_USER,
@@ -13,7 +14,6 @@ import {
 } from "./constant"
 
 /* Root API route */
-const API_URL = `http://localhost:8000/api`
 
 const authenticateUser = ({ username, password }) => {
     return axios

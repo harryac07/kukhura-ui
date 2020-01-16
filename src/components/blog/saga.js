@@ -1,6 +1,7 @@
 import { call, put, takeLatest, takeEvery, all } from "redux-saga/effects";
 import axios from "axios"
 import { take } from "lodash"
+import { API_URL } from 'env'
 
 import {
     FETCH_BLOG_LIST_SUCCEED,
@@ -9,11 +10,10 @@ import {
 } from "./constant"
 
 /* Root API end point */
-const API_URL = `http://localhost:8000/api`
 
 const fetchBlogList = ({ pageOffsetEnd }) => {
     return axios
-        .get(`${API_URL}/blogposts/`)
+        .get(`${API_URL}/blogposts/?category=blog`)
         .then(response => {
             return response.data
         });

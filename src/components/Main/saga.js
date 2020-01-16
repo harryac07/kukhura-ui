@@ -1,14 +1,13 @@
 import { call, put, takeLatest, takeEvery, all } from "redux-saga/effects";
 import axios from "axios"
 import { take } from "lodash"
+import { API_URL } from 'env'
 
 import {
     FETCH_USER,
     FETCH_USER_SUCCEED,
     FETCH_USER_FAILED
 } from "./constant"
-
-const API_URL = `http://localhost:8000/api`
 
 const fetchCurrentUser = () => {
     return axios

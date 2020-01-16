@@ -1,13 +1,13 @@
 import { call, put, takeLatest, takeEvery, all } from "redux-saga/effects";
 import axios from "axios"
 import { take } from "lodash"
+import { API_URL } from 'env'
 
 import {
     GET_PRODUCTS,
     GET_PRODUCTS_SUCCEED,
     GET_PRODUCTS_FAILED
 } from "./constant"
-const API_URL = `http://localhost:8000/api`
 
 const fetchProducts = () => {
     return axios
