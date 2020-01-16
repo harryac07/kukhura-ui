@@ -1,8 +1,11 @@
 import { FETCH_BLOG_DETAIL } from './constant'
 
-export const fetchBlogDetail = (postId) => {
+export const fetchBlogDetail = (id, type="blog") => {
   return {
     type: FETCH_BLOG_DETAIL,
-    data: postId
+    data: {
+        id,
+        type
+    }
   }
 }

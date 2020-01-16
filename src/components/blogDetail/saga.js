@@ -9,9 +9,12 @@ import {
     FETCH_BLOG_DETAIL
 } from "./constant"
 
-const fetchBlogById = (postId) => {
+const fetchBlogById = ({ type, id }) => {
+    const postTypeUrl = type === 'product'
+        ? 'products'
+        : 'blogposts'
     return axios
-        .get(`${API_URL}/blogposts/${postId}/`)
+        .get(`${API_URL}/${postTypeUrl}/${id}/`)
         .then(response => {
             return response.data
         });

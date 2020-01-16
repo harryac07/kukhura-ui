@@ -11,12 +11,12 @@ class BlogDetail extends Component {
         super(props);
     }
     componentDidMount() {
-        const { id } = this.props.match.params;
+        const { 0: type, id } = this.props.match.params;
         const { blogDetail } = this.props.blogDetail;
         /* Fetch only if not exists */
         if (!blogDetail.id || (id != blogDetail.id)) {
             // Dispatch action
-            this.props.fetchBlogDetail(id);
+            this.props.fetchBlogDetail(id, type);
         }
     }
 
