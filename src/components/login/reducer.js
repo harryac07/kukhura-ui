@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCEED, LOGIN_FAILED } from './constant'
+import { LOGIN, LOGIN_SUCCEED, LOGIN_FAILED, CHECK_AUTHENTICATION_SUCCEED } from './constant'
 
 const initialState = {
     loading: false,
@@ -18,6 +18,12 @@ const loginReducer = (state = initialState, action) => {
                 ...state,
                 loggedIn: true,
                 user: action.payload,
+                loading: false
+            }
+        case CHECK_AUTHENTICATION_SUCCEED:
+            return {
+                ...state,
+                loggedIn: true,
                 loading: false
             }
         default:

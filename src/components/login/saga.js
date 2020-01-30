@@ -10,14 +10,17 @@ import {
     FETCH_USER_SUCCEED,
     LOGIN,
     LOGIN_SUCCEED,
-    LOGIN_FAILED
+    LOGIN_FAILED,
+    CHECK_AUTHENTICATION,
+    CHECK_AUTHENTICATION_SUCCEED,
+    CHECK_AUTHENTICATION_FAILED
 } from "./constant"
 
 /* Root API route */
 
-const authenticateUser = ({ username, password }) => {
+const login = ({ username, password }) => {
     return axios
-        .post(`${API_URL}/authenticate/`, {
+        .post(`${API_URL}/auth/login/`, {
             username,
             password
         })
@@ -25,10 +28,9 @@ const authenticateUser = ({ username, password }) => {
             return response.data
         });
 };
-export function* authenticateUserSaga(action) {
+export function* userLoginSaga(action) {
     try {
-        const data = yield call(authenticateUser, action.data);
-
+        const data = yield call(login, action.data);
         localStorage.setItem('auth_token', data.token);
         localStorage.setItem('user_id', data.user_id);
         localStorage.setItem('email', data.email);
@@ -46,6 +48,37 @@ export function* authenticateUserSaga(action) {
     }
 }
 
+
+const checkIfAuthenticated = (token = "") => {
+    return axios
+        .get(`${API_URL}/auth/isauthenticated/?token=${token}`)
+        .then(response => {
+            console.log(response.status, response.data);
+            return response.data
+        });
+};
+export function* checkIfAuthenticatedSaga(action) {
+    try {
+        const data = yield call(checkIfAuthenticated, action.data);
+        console.log(data)
+        if (data === 'Not logged in!') {
+            localStorage.clear();
+        } else {
+            yield put({
+                type: CHECK_AUTHENTICATION_SUCCEED,
+            });
+        }
+    } catch (error) {
+        console.log(error.response)
+        localStorage.clear();
+        yield put({
+            type: CHECK_AUTHENTICATION_FAILED,
+            error: 'User not logged in.'
+        });
+    }
+}
+
 export const loginSaga = [
-    takeEvery(LOGIN, authenticateUserSaga),
+    takeEvery(LOGIN, userLoginSaga),
+    takeEvery(CHECK_AUTHENTICATION, checkIfAuthenticatedSaga),
 ];

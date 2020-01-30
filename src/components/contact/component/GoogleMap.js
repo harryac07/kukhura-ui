@@ -22,7 +22,7 @@ const GoogleMap = (props) => {
         <Grid item xs={12} sm={12}>
           <div style={{ height: '50vh', width: '100%' }}>
             <GoogleMapReact
-              bootstrapURLKeys={{ key: 'AIzaSyBLkC8Nxs4l1pXwv7T_N4gqgi3lpwuxsc4irah' }}
+              bootstrapURLKeys={{ key: 'AIzaSyBLkC8Nxs4l1pXwv7T_N4gqgi3lpwuxscAirah9x' }}
               defaultCenter={defaultValue.center}
               defaultZoom={defaultValue.zoom}
             // yesIWantToUseGoogleMapApiInternals={true}

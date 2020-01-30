@@ -119,6 +119,9 @@ const Header = (props) => {
 
     const { pathname = "" } = props.location;
 
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+
     return (
         <div>
             <div className={classes.navigationMenuBar} onClick={() => setMobileView(!mobileView)}>
@@ -165,6 +168,20 @@ const Header = (props) => {
                             style={pathname === '/blog' ? { color: 'red' } : {}}
                             to="/blog">BLOG</Link>
                     </li>
+                    {
+                        username && email
+                            ? <li onClick={() => setActiveMenu('admin')}>
+                                <Link
+                                    style={pathname === '/admin'
+                                        ? { color: 'red' } : {}
+                                    }
+                                    to="/admin">
+                                    ADMIN (<span style={{color: 'red'}}>{username}</span>)
+                            </Link>
+                            </li>
+                            : null
+                    }
+
                 </ul>
             </div>
             <ScrollUpButton
