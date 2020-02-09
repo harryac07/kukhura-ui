@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
+import { compose } from "redux";
+import { connect } from "react-redux";
 
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import Profile from './component/Profile'
+import CreatePost from './component/CreatePost'
+import { fetchPostCategories } from './action'
 
 class Admin extends Component {
     constructor(props) {
@@ -14,6 +18,9 @@ class Admin extends Component {
             selectedValue: 0
         }
     }
+    componentDidMount() {
+        this.props.fetchPostCategories();
+    }
     handleChange = (e, newValue) => {
         e.preventDefault();
         this.setState({
@@ -21,6 +28,7 @@ class Admin extends Component {
         })
     }
     render() {
+        const { postCategories } = this.props.admin;
         return (
             <ComponentWrapper>
                 {/* Tab menu */}
@@ -42,7 +50,7 @@ class Admin extends Component {
                         this.state.selectedValue === 0
                             ? <Profile />
                             : this.state.selectedValue === 1
-                                ? 'World'
+                                ? <CreatePost postCategories={postCategories} />
                                 : 'Noooo'
                     }
                 </Wrapper>
@@ -51,8 +59,20 @@ class Admin extends Component {
     }
 }
 
-export default Admin;
+const mapStateToProps = state => {
+    return {
+        app: state.home,
+        admin: state.admin,
+        router: state.router,
+    };
+};
 
+const withConnect = connect(mapStateToProps, {
+    fetchPostCategories
+});
+
+
+export default compose(withConnect)(Admin);
 const Wrapper = styled.div`
     margin: 20px auto;
 `;

@@ -4,6 +4,7 @@ import { blogSaga } from '../components/blog/saga';
 import { blogDetailSaga } from '../components/blogDetail/saga';
 import { loginSaga } from '../components/login/saga';
 import { productSaga } from '../components/products/saga';
+import { adminSaga } from '../components/admin/saga';
 
 export default function* rootSaga() {
     yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
         ...blogDetailSaga,
         ...loginSaga,
         ...productSaga,
+        ...adminSaga,
     ])
 }

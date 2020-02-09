@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history'
+import { toast } from 'react-toastify';
 
 import rootReducer from 'store/reducers'
 import saga from 'store/sagas'
@@ -14,6 +15,12 @@ import * as serviceWorker from './serviceWorker';
 
 /* react loader spinner CSS */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+
+/* react toastify css */
+import 'react-toastify/dist/ReactToastify.css';
+
+// configure react toastify
+toast.configure()
 
 const history = createBrowserHistory()
 // create the saga middleware
