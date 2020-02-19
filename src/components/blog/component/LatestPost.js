@@ -18,7 +18,10 @@ const useStyles = makeStyles(theme => ({
     },
     recentPost: {
         position: 'relative',
-        width: '100%'
+        width: '100%',
+        backgroundRepeat: 'no-repeat !important',
+        backgroundSize: 'cover !important',
+        minHeight: '500px',
     },
     recentPostWrapper: {
         position: 'absolute',
@@ -71,7 +74,7 @@ const LatestPost = ({ recentPost = {}, history, addSelectedBlogDetail }) => {
         description = "",
         created = "",
         author = "",
-        post_primary_image = "https://dummyimage.com/1200x500/cccccc/000.jpg",
+        primary_image = "https://dummyimage.com/1200x500/cccccc/000.jpg",
     } = recentPost;
     if (!title) {
         return <div />
@@ -83,10 +86,7 @@ const LatestPost = ({ recentPost = {}, history, addSelectedBlogDetail }) => {
             <div
                 className={classes.recentPost}
                 style={{
-                    backgroundImage: `url("${post_primary_image}")`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: '100% 100%',
-                    minHeight: '500px',
+                    backgroundImage: `url("${primary_image}")`
                 }}
             >
                 {/* Post wrapper */}

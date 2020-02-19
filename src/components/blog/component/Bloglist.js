@@ -69,7 +69,7 @@ const BlogList = ({
                             id = "",
                             title = "",
                             description = "",
-                            post_primary_image = "https://dummyimage.com/250x250/cccccc/000.jpg",
+                            primary_image = "https://dummyimage.com/250x250/cccccc/000.jpg",
                             author = "Admin",
                             created = "",
                             updated = ""
@@ -77,7 +77,7 @@ const BlogList = ({
                         return (
                             <Grid item xs={12} sm={3} key={id}>
                                 <ImageTitleTextButton
-                                    bgImageUrl={post_primary_image}
+                                    bgImageUrl={primary_image}
                                     titleDom={
                                         <StyledLink to={`/blog/${id}`} onClick={() => {
                                             addSelectedBlogDetail(each);

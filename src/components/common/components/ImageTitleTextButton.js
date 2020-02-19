@@ -20,8 +20,8 @@ const useStyles = makeStyles(({
   },
   backgroundImage: {
     background: props => props.bgImageUrl,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat !important',
+    backgroundSize: 'cover !important',
     minHeight: '250px',
     maxHeight: 'auto'
   },
