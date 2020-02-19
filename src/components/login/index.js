@@ -19,7 +19,7 @@ class Login extends Component {
         const { router, login } = this.props;
         const { loggedIn } = login;
         if (loggedIn) {
-            this.props.history.push('/')
+            this.props.history.push('/admin')
             // return;
         }
         return (

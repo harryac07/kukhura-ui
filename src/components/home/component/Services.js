@@ -30,7 +30,7 @@ const Services = (props) => {
                                     bgImageUrl={primary_image}
                                     title={
                                         truncate(title.toUpperCase() || "", {
-                                            'length': 300,
+                                            'length': 60,
                                         })
                                     }
                                     text={

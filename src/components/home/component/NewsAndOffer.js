@@ -45,7 +45,11 @@ const NewsAndOffer = ({ recentPosts }) => {
                                 <div className={classes.item}>
                                     <StyledLink to={'/blog/' + id}>
                                         <Typography className={classes.textBold} variant="p">
-                                            {title.toUpperCase()}
+                                            {
+                                                truncate(title.toUpperCase() || "", {
+                                                    'length': 80,
+                                                })
+                                            }
                                         </Typography>
                                     </StyledLink>
                                     <p>{moment(created).format('LL')}</p>

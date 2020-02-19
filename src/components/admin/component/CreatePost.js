@@ -19,6 +19,7 @@ const styles = theme => ({
     },
     fileUploadField: {
         width: '100%',
+        textTransform: 'capitalize'
     },
     input: {
         width: '100%'
@@ -28,7 +29,7 @@ const styles = theme => ({
     },
 });
 
-const initialState={
+const initialState = {
     title: '',
     description: '',
     primary_image: null,
@@ -107,7 +108,7 @@ class CreatePost extends React.Component {
             formData.append('available', this.state.available);
             formData.append('hero_post', this.state.hero_post);
             formData.append('category', this.state.category);
-            
+
             /* send data to server */
             this.props.createPost(formData, this.state.category)
         } else {
@@ -116,8 +117,8 @@ class CreatePost extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(this.props.post_created!==prevProps.post_created && this.props.post_created){
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.post_created !== prevProps.post_created && this.props.post_created) {
             toast.info(`${startCase(this.state.category)} created successfully!`);
             this.setState(initialState);
         }
@@ -146,7 +147,7 @@ class CreatePost extends React.Component {
                         <Grid item xs={12} sm={12} md={12}>
                             <TextField
                                 value={this.state.title}
-                                label="title"
+                                label="Title"
                                 name="title"
                                 onChange={this.handleInputChange}
                                 className={classes.textField}
@@ -157,7 +158,7 @@ class CreatePost extends React.Component {
                             />
                             <TextField
                                 value={this.state.description}
-                                label="description"
+                                label="Description"
                                 name="description"
                                 onChange={this.handleInputChange}
                                 className={classes.textField}
@@ -171,36 +172,43 @@ class CreatePost extends React.Component {
                             />
                             <br />
                             <br />
-                            <Grid item xs={12} sm={12} md={12}>
-                                <FormControl
-                                    variant="outlined"
-                                    style={{
-                                        minWidth: 320,
-                                    }}
-                                >
-                                    <InputLabel
+                            {
+                                this.state.category === 'product'
+                                    ? (
+                                        <React.Fragment>
+                                            <Grid item xs={12} sm={12} md={12}>
+                                                <FormControl
+                                                    variant="outlined"
+                                                    style={{
+                                                        minWidth: 320,
+                                                    }}
+                                                >
+                                                    <InputLabel
 
-                                        id="available-label">
-                                        Available
-                                    </InputLabel>
-                                    <Select
-                                        labelId="available-label"
-                                        id="available"
-                                        value={this.state.available}
-                                        name={"available"}
-                                        onChange={this.handleInputChange}
-                                        variant={"outlined"}
-                                        style={{
-                                            width: '100%',
-                                            borderRadius: 0
-                                        }}
-                                    >
-                                        <MenuItem value={true}>True</MenuItem>
-                                        <MenuItem value={false}>False</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                            <br />
+                                                        id="available-label">
+                                                        Available
+                                                    </InputLabel>
+                                                    <Select
+                                                        labelId="available-label"
+                                                        id="available"
+                                                        value={this.state.available}
+                                                        name={"available"}
+                                                        onChange={this.handleInputChange}
+                                                        variant={"outlined"}
+                                                        style={{
+                                                            width: '100%',
+                                                            borderRadius: 0
+                                                        }}
+                                                    >
+                                                        <MenuItem value={true}>True</MenuItem>
+                                                        <MenuItem value={false}>False</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </Grid>
+                                            <br />
+                                        </React.Fragment>)
+                                    : null
+                            }
                             <Button
                                 variant="outlined"
                                 component="label"
