@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import Profile from './component/Profile'
 import CreatePost from './component/CreatePost'
-import { fetchPostCategories } from './action'
+import { fetchPostCategories, createPost } from './action'
 
 class Admin extends Component {
     constructor(props) {
@@ -50,7 +50,10 @@ class Admin extends Component {
                         this.state.selectedValue === 0
                             ? <Profile />
                             : this.state.selectedValue === 1
-                                ? <CreatePost postCategories={postCategories} />
+                                ? <CreatePost 
+                                    postCategories={postCategories} 
+                                    createPost={this.props.createPost}
+                                    />
                                 : 'Noooo'
                     }
                 </Wrapper>
@@ -68,7 +71,8 @@ const mapStateToProps = state => {
 };
 
 const withConnect = connect(mapStateToProps, {
-    fetchPostCategories
+    fetchPostCategories,
+    createPost
 });
 
 

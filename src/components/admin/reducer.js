@@ -1,4 +1,4 @@
-import { FETCH_POST_CATEGORIES_SUCCEED } from './constant'
+import { FETCH_POST_CATEGORIES_SUCCEED, CREATE_POST, CREATE_POST_SUCCEED, CREATE_POST_FAILED } from './constant'
 
 const initialState = {
     loading: false,
@@ -10,6 +10,11 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postCategories: action.payload
+            }
+        case CREATE_POST_SUCCEED:
+            return {
+                ...state,
+                post_created: true
             }
         default:
             return state;

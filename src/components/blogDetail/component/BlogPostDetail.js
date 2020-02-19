@@ -30,8 +30,8 @@ const useStyles = makeStyles(theme => ({
     },
     backgroundImage: {
         background: props => props.bgImageUrl,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat !important',
+        backgroundSize: 'cover !important',
         minHeight: '500px'
     },
     centerDiv: {

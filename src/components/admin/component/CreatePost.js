@@ -34,7 +34,7 @@ class CreatePost extends React.Component {
         this.state = {
             title: '',
             description: '',
-            primary_image: '',
+            primary_image: null,
             secondary_images: '',
             hero_post: false,
             category: '',
@@ -51,6 +51,15 @@ class CreatePost extends React.Component {
             [e.target.name]: e.target.value,
             error: {
                 [e.target.name]: !e.target.value ? 'Required' : null,
+            }
+        })
+    }
+    selectFile = (e) => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.files[0],
+            error: {
+                [e.target.name]: null,
             }
         })
     }
@@ -96,10 +105,16 @@ class CreatePost extends React.Component {
         const isErrorFree = this.handleErrorOnSubmit();
         if (isErrorFree) {
             let formData = new FormData();
-            formData.append('primary_image', this.state.primary_image);
-            
+            formData.append('primary_image', 'Not defined');
+            formData.append('image_file', this.state.primary_image);
+            formData.append('title', this.state.title);
+            formData.append('description', this.state.description);
+            formData.append('available', this.state.available);
+            formData.append('hero_post', this.state.hero_post);
+            formData.append('category', this.state.category);
             /* send data to server */
-            // console.log(payload, formData)
+            console.log(payload, formData)
+            this.props.createPost(formData, 'blogpost')
         } else {
             // Show Error Message
             toast.error("Please follow the error message and try again!")
@@ -112,7 +127,7 @@ class CreatePost extends React.Component {
 
         const categoriesOptions = postCategories.map(each => {
             return (
-                <MenuItem value={each.id} key={each.id}>{each.name}</MenuItem>
+                <MenuItem value={each.name} key={each.id}>{each.name}</MenuItem>
             );
         })
         return (
@@ -123,6 +138,7 @@ class CreatePost extends React.Component {
                     noValidate
                     autoComplete="off"
                     onSubmit={this.handleSubmit}
+                    encType="multipart/form-data"
                 >
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={12} md={12}>
@@ -187,10 +203,10 @@ class CreatePost extends React.Component {
                             >
                                 Primary image
                                 <input
-                                    value={this.state.primary_image}
+                                    // value={this.state.primary_image}
                                     name="primary_image"
                                     required
-                                    onChange={this.handleInputChange}
+                                    onChange={this.selectFile}
                                     margin="normal"
                                     variant="outlined"
                                     className={classes.fileUploadField}

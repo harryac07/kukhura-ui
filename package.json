@@ -10,6 +10,7 @@
     "connected-react-router": "^6.5.2",
     "google-map-react": "^1.1.5",
     "history": "^4.10.1",
+    "jimp": "^0.9.3",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
