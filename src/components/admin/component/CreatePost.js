@@ -1,5 +1,5 @@
 import React from 'react'
-import { isEmpty } from 'lodash'
+import { isEmpty, startCase } from 'lodash'
 import { withStyles } from '@material-ui/styles';
 import { toast } from 'react-toastify';
 import { TextField, FormControl, Grid, Select, MenuItem, InputLabel, Button } from '@material-ui/core';
@@ -28,19 +28,22 @@ const styles = theme => ({
     },
 });
 
+const initialState={
+    title: '',
+    description: '',
+    primary_image: null,
+    primary_image_name: "",
+    secondary_images: '',
+    hero_post: false,
+    category: '',
+    available: false, // in case of products
+    error: {}
+};
+
 class CreatePost extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            title: '',
-            description: '',
-            primary_image: null,
-            secondary_images: '',
-            hero_post: false,
-            category: '',
-            available: false, // in case of products
-            error: {}
-        }
+        this.state = initialState
     }
     componentDidMount() {
         //
@@ -58,6 +61,7 @@ class CreatePost extends React.Component {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.files[0],
+            primary_image_name: e.target.value,
             error: {
                 [e.target.name]: null,
             }
@@ -93,15 +97,6 @@ class CreatePost extends React.Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        const payload = {
-            title: this.state.title,
-            description: this.state.description,
-            available: this.state.available,
-            primary_image: this.state.primary_image,
-            secondary_images: this.state.secondary_images,
-            hero_post: this.state.hero_post,
-            category: this.state.category,
-        }
         const isErrorFree = this.handleErrorOnSubmit();
         if (isErrorFree) {
             let formData = new FormData();
@@ -118,6 +113,13 @@ class CreatePost extends React.Component {
         } else {
             // Show Error Message
             toast.error("Please follow the error message and try again!")
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.props.post_created!==prevProps.post_created && this.props.post_created){
+            toast.info(`${startCase(this.state.category)} created successfully!`);
+            this.setState(initialState);
         }
     }
 
@@ -161,6 +163,9 @@ class CreatePost extends React.Component {
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
+                                multiline
+                                rowsMax={10}
+                                rows={8}
                                 error={!!this.state.error.description}
                                 helperText={this.state.error.description}
                             />
@@ -207,6 +212,7 @@ class CreatePost extends React.Component {
                                     name="primary_image"
                                     required
                                     onChange={this.selectFile}
+                                    value={this.state.primary_image_name}
                                     margin="normal"
                                     variant="outlined"
                                     className={classes.fileUploadField}

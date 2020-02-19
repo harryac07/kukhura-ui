@@ -2,7 +2,7 @@ import { FETCH_POST_CATEGORIES_SUCCEED, CREATE_POST, CREATE_POST_SUCCEED, CREATE
 
 const initialState = {
     loading: false,
-    postCategories: [],
+    postCategories: []
 }
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -10,6 +10,11 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postCategories: action.payload
+            }
+        case CREATE_POST:
+            return {
+                ...state,
+                post_created: false
             }
         case CREATE_POST_SUCCEED:
             return {

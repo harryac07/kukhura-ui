@@ -11,6 +11,7 @@ import Profile from './component/Profile'
 import CreatePost from './component/CreatePost'
 import { fetchPostCategories, createPost } from './action'
 
+
 class Admin extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +29,7 @@ class Admin extends Component {
         })
     }
     render() {
-        const { postCategories } = this.props.admin;
+        const { postCategories, post_created } = this.props.admin;
         return (
             <ComponentWrapper>
                 {/* Tab menu */}
@@ -53,6 +54,7 @@ class Admin extends Component {
                                 ? <CreatePost 
                                     postCategories={postCategories} 
                                     createPost={this.props.createPost}
+                                    post_created={post_created}
                                     />
                                 : 'Noooo'
                     }
