@@ -112,9 +112,9 @@ class CreatePost extends React.Component {
             formData.append('available', this.state.available);
             formData.append('hero_post', this.state.hero_post);
             formData.append('category', this.state.category);
+            
             /* send data to server */
-            console.log(payload, formData)
-            this.props.createPost(formData, 'blogpost')
+            this.props.createPost(formData, this.state.category)
         } else {
             // Show Error Message
             toast.error("Please follow the error message and try again!")

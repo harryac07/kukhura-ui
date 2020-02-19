@@ -38,8 +38,14 @@ export function* fetchPostCategoriesSaga(action) {
 /* createPost */
 const createPost = ({ data, postType }) => {
     console.log(postType, data)
+    let postUrl = '';
+    if (postType === 'blog') {
+        postUrl = `${API_URL}/blogposts/`;
+    } else {
+        postUrl = `${API_URL}/products/`;
+    }
     return axios
-        .post(`${API_URL}/blogposts/`, data, {
+        .post(postUrl, data, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem('auth_token')}`,
                 "Content-type": "multipart/form-data",

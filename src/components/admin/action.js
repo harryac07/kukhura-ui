@@ -5,8 +5,7 @@ export const fetchPostCategories = () => {
         type: FETCH_POST_CATEGORIES
     }
 }
-export const createPost = (data, postType = "blogpost") => {
-    console.log('action, createPost',)
+export const createPost = (data, postType = "blog") => {
     return {
         type: CREATE_POST,
         data: data,
