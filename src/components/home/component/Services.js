@@ -1,12 +1,14 @@
 import React from 'react'
 import { truncate } from 'lodash'
+import { withRouter } from 'react-router-dom'
 
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import ImageTitleTextButton from 'components/common/components/ImageTitleTextButton'
 import Title from 'components/common/components/Title'
 import { Grid } from '@material-ui/core';
 
-const Services = ({ products }) => {
+const Services = (props) => {
+    const { products, history } = props;
     return (
         <ComponentWrapper>
             <Title text={"Our products and services"} padding="0px 0px 24px 0px" />
@@ -17,7 +19,7 @@ const Services = ({ products }) => {
                             id = "",
                             title = "",
                             description = "",
-                            product_primary_image = "https://dummyimage.com/250x250/cccccc/000.jpg",
+                            primary_image = "https://dummyimage.com/250x250/cccccc/000.jpg",
                             author = "Admin",
                             created = "",
                             updated = ""
@@ -25,7 +27,7 @@ const Services = ({ products }) => {
                         return (
                             <Grid item xs={12} sm={4} key={id}>
                                 <ImageTitleTextButton
-                                    bgImageUrl={product_primary_image}
+                                    bgImageUrl={primary_image}
                                     title={
                                         truncate(title.toUpperCase() || "", {
                                             'length': 300,
@@ -38,6 +40,7 @@ const Services = ({ products }) => {
                                     }
                                     button={true}
                                     buttonText={"read more"}
+                                    onButtonClick={() => history.push(`/product/${id}/`)}
                                 />
                             </Grid>
                         )
@@ -47,4 +50,4 @@ const Services = ({ products }) => {
         </ComponentWrapper>
     )
 }
-export default Services
+export default withRouter(Services)
