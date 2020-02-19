@@ -1,6 +1,5 @@
 import React from 'react'
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
-import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import ImageTitleTextButton from 'components/common/components/ImageTitleTextButton'
 import { makeStyles } from '@material-ui/core/styles';
@@ -40,25 +39,10 @@ const BlogList = ({
     blogList,
     loadMoreBlogPosts,
     isMoreBlog,
-    addSelectedBlogDetail
+    addSelectedBlogDetail,
+    morePostRequestedLoading
 }) => {
     const classes = useStyles();
-    const timer = React.useRef();
-
-    const [loading, setLoading] = React.useState(false);
-
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(timer.current);
-        };
-    }, []);
-
-    const handleCircularLoading = () => {
-        setLoading(true);
-        timer.current = setTimeout(() => {
-            setLoading(false);
-        }, 1500);
-    }
     return (
         <ComponentWrapper backgroundColor="#f0f0f0">
             <Grid container spacing={3}>
@@ -117,7 +101,6 @@ const BlogList = ({
                             <div className={classes.centerDiv}>
                                 <OrangeButton
                                     onClick={() => {
-                                        handleCircularLoading();
                                         loadMoreBlogPosts();
                                     }}
                                     padding="12px"
@@ -125,7 +108,7 @@ const BlogList = ({
                                 >
                                     Load More
                                     {
-                                        loading
+                                        morePostRequestedLoading
                                             ? <CircularProgress
                                                 className={classes.circlularLoading}
                                                 variant="indeterminate"

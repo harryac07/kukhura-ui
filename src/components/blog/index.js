@@ -14,6 +14,9 @@ import { fetchBlogList, addSelectedBlogDetail } from './action'
 class Blog extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            morePostRequested: false
+        }
     }
     componentDidMount() {
         //Dispatch action
@@ -23,9 +26,16 @@ class Blog extends Component {
         const { blogPaginationEndOffset } = this.props.blog;
         //Dispatch action
         this.props.fetchBlogList(blogPaginationEndOffset + 4);
+        this.setState({
+            morePostRequested: true
+        });
     }
     render() {
-        const { blogList, blogPaginationEndOffset, heroBlogPost } = this.props.blog;
+        const { 
+            blogList, 
+            blogPaginationEndOffset, 
+            heroBlogPost, 
+            loading } = this.props.blog;
         const { history } = this.props;
         if (blogList.length === 0) {
             return <Loader showLoader={true} />
@@ -45,6 +55,7 @@ class Blog extends Component {
                     isMoreBlog={blogPaginationEndOffset < blogList.length}
                     addSelectedBlogDetail={this.props.addSelectedBlogDetail}
                     history={history}
+                    morePostRequestedLoading={this.state.morePostRequested && loading}
                 />
                 <Divider />
 
