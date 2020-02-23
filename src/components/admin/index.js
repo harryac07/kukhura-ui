@@ -8,6 +8,7 @@ import ComponentWrapper from 'components/common/components/ComponentWrapper'
 import Profile from './component/Profile'
 import CreatePost from './component/CreatePost'
 import { fetchPostCategories, createPost } from './action'
+import { checkAuthentication } from '../login/action';
 import { OrangeButton } from 'components/common/components/Button'
 
 
@@ -19,6 +20,14 @@ class Admin extends Component {
         }
     }
     componentDidMount() {
+        const auth_token = localStorage.getItem('auth_token');
+        if (!auth_token) {
+            this.handleLogout();
+            return;
+        } else {
+            /* check authentication */
+            this.props.checkAuthentication();
+        }
         this.props.fetchPostCategories();
     }
     handleChange = (e, newValue) => {
@@ -33,6 +42,12 @@ class Admin extends Component {
     }
     render() {
         const { postCategories, post_created } = this.props.admin;
+        const { loggedIn } = this.props.login;
+        /*  redirect to home page if not logged in */
+        if (!loggedIn) {
+            this.handleLogout();
+            return <p />;
+        }
         return (
             <ComponentWrapper>
                 {/* Tab menu */}
@@ -90,12 +105,14 @@ const mapStateToProps = state => {
         app: state.home,
         admin: state.admin,
         router: state.router,
+        login: state.login,
     };
 };
 
 const withConnect = connect(mapStateToProps, {
     fetchPostCategories,
-    createPost
+    createPost,
+    checkAuthentication
 });
 
 

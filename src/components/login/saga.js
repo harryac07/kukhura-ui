@@ -53,7 +53,6 @@ const checkIfAuthenticated = (token = "") => {
     return axios
         .get(`${API_URL}/auth/isauthenticated/?token=${token}`)
         .then(response => {
-            console.log(response.status, response.data);
             return response.data
         });
 };

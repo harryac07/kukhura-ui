@@ -30,7 +30,6 @@ class App extends Component {
     }
     componentDidMount() {
         // this.props.fetchCurrentUser();
-        console.log('abc')
         this.props.checkAuthentication();
     }
     render() {
