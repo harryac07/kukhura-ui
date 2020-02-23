@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import BlogPostDetail from './component/BlogPostDetail'
 import Loader from 'components/common/components/CommonLoader'
 
-import { fetchBlogDetail } from './action'
+import { fetchBlogDetail, createPostComment } from './action'
 
 class BlogDetail extends Component {
     constructor(props) {
@@ -19,7 +19,12 @@ class BlogDetail extends Component {
             this.props.fetchBlogDetail(id, type);
         }
     }
-
+    submitComment = (commentData) => {
+        const { 0: type } = this.props.match.params;
+        console.log(commentData, type);
+        // Dispatch action
+        this.props.createPostComment(commentData, type);
+    }
     render() {
         const { blogDetail, loading } = this.props.blogDetail;
         const { 0: type, } = this.props.match.params;
@@ -29,7 +34,10 @@ class BlogDetail extends Component {
         }
         return (
             <div>
-                <BlogPostDetail post={blogDetail} postType={type} />
+                <BlogPostDetail
+                    submitComment={this.submitComment}
+                    post={blogDetail}
+                    postType={type} />
             </div>
         )
     }
@@ -44,5 +52,6 @@ const mapStateToProps = state => {
 
 const withConnect = connect(mapStateToProps, {
     fetchBlogDetail,
+    createPostComment
 });
 export default compose(withConnect)(BlogDetail);

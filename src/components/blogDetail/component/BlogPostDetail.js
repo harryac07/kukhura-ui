@@ -1,5 +1,6 @@
 import React from 'react'
 import ComponentWrapper from 'components/common/components/ComponentWrapper'
+import Comment from './Comment'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,10 +12,11 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     fadedTextColor: {
-        color: '#7c7c7c'
+        color: '#7c7c7c',
     },
     blackTextColor: {
-        color: '#000'
+        color: '#000',
+        whiteSpace: 'pre-wrap'
     },
     ServicesH3: {
         fontWeight: 'bold'
@@ -67,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BlogPostDetail = ({ post = {}, postType = "blog" }) => {
+const BlogPostDetail = ({ post = {}, postType = "blog", submitComment }) => {
     const {
         id = "",
         title = "",
@@ -122,7 +124,6 @@ const BlogPostDetail = ({ post = {}, postType = "blog" }) => {
                                     </span>
                                 </p>
                                 <br />
-                                <br />
                                 <p className={classes.blackTextColor}>
                                     {description}
                                 </p>
@@ -131,6 +132,11 @@ const BlogPostDetail = ({ post = {}, postType = "blog" }) => {
                     </div>
                 </Grid>
             </Grid>
+            {/* Comment section */}
+            <Comment
+                submitComment={submitComment}
+                blogId={id}
+            />
         </ComponentWrapper>
     )
 }
