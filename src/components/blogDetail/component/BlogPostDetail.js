@@ -77,7 +77,6 @@ const BlogPostDetail = ({ post = {}, postType = "blog", submitComment }) => {
         author = "Admin",
         primary_image = "",
         created = "Admin",
-        comments = []
     } = post;
     const classes = useStyles(
         {
@@ -136,6 +135,7 @@ const BlogPostDetail = ({ post = {}, postType = "blog", submitComment }) => {
             <Comment
                 submitComment={submitComment}
                 blogId={id}
+                postComments={post && post.comments ? post.comments : []}
             />
         </ComponentWrapper>
     )
