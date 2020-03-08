@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
 import { startCase } from 'lodash'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Avatar } from '@material-ui/core';
 import { OrangeButton } from 'components/common/components/Button'
+import CommentForm from './CommentForm'
 
 const useStyles = makeStyles(theme => ({
     mainDiv: {
@@ -66,7 +67,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CommentFormat = (props) => {
-    const { data, type = "comment", children } = props;
+    const { data, type = "comment", allowReply, handleReply, children } = props;
     const classes = useStyles({
         avatarBackground: type !== 'comment' ? '#E0E0E0' : null
     });
@@ -98,7 +99,7 @@ const CommentFormat = (props) => {
                     variant="contained"
                     color="primary"
                     padding="1px 5px"
-                    display={type === 'comment' ? 'inline-block' : 'none'}
+                    display={type === 'comment' && allowReply ? 'inline-block' : 'none'}
                     className={classes.button}
                     style={{
                         backgroundColor: '#f65314',
@@ -106,6 +107,7 @@ const CommentFormat = (props) => {
                         textTransform: 'none',
                         fontSize: 12
                     }}
+                    onClick={handleReply}
                 >
                     Reply
                 </OrangeButton>
@@ -116,8 +118,14 @@ const CommentFormat = (props) => {
 }
 
 const CommentBox = (props) => {
-    const { comments } = props;
+    const { comments, dispatchReplyCreate } = props;
     const classes = useStyles();
+
+    const [showReplyForm, onReplyFormStatusChange] = useState("");
+
+    const submitReply = (data) => {
+        dispatchReplyCreate(data)
+    }
     return (
         <div>
             <Typography className={classes.title} variant="p">
@@ -133,14 +141,31 @@ const CommentBox = (props) => {
                     const replies = each.reply;
                     return (
                         <div>
-                            <CommentFormat data={each} type={'comment'} >
+                            <CommentFormat
+                                data={each}
+                                type={'comment'}
+                                handleReply={() => onReplyFormStatusChange(each.id)}
+                                allowReply={showReplyForm !== each.id}
+                            >
                                 {
-                                    replies.map(eachReply => {
-                                        return <CommentFormat
-                                            data={eachReply}
-                                            type={'reply'}
+                                    showReplyForm && showReplyForm === each.id
+                                        ? <CommentForm
+                                            headerText={`Leave a reply`}
+                                            headerFontSize={'18px'}
+                                            headerPadding={'20px 0px'}
+                                            backgroundColor={"#fff"}
+                                            submitComment={submitReply}
+                                            blogId={each.id}
+                                            commentId={each.id}
+                                            handleCancel={() => onReplyFormStatusChange("")}
                                         />
-                                    })
+                                        :
+                                        replies.map(eachReply => {
+                                            return <CommentFormat
+                                                data={eachReply}
+                                                type={'reply'}
+                                            />
+                                        })
                                 }
                             </CommentFormat>
                         </div>

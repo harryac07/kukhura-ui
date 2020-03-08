@@ -69,7 +69,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BlogPostDetail = ({ post = {}, postType = "blog", submitComment }) => {
+const BlogPostDetail = ({
+    post = {},
+    postType = "blog",
+    submitComment,
+    dispatchReplyCreate }) => {
     const {
         id = "",
         title = "",
@@ -136,6 +140,7 @@ const BlogPostDetail = ({ post = {}, postType = "blog", submitComment }) => {
                 submitComment={submitComment}
                 blogId={id}
                 postComments={post && post.comments ? post.comments : []}
+                dispatchReplyCreate={dispatchReplyCreate}
             />
         </ComponentWrapper>
     )

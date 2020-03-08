@@ -8,7 +8,10 @@ import {
   FETCH_BLOG_DETAIL,
   CREATE_BLOG_POST_COMMENT,
   CREATE_BLOG_POST_COMMENT_SUCCEED,
-  CREATE_BLOG_POST_COMMENT_FAILED
+  CREATE_BLOG_POST_COMMENT_FAILED,
+  CREATE_POST_COMMENT_REPLY,
+  CREATE_POST_COMMENT_REPLY_SUCCEED,
+  CREATE_POST_COMMENT_REPLY_FAILED
 } from "./constant"
 
 const fetchBlogById = ({ type, id }) => {
@@ -67,7 +70,43 @@ export function* createBlogPostCommentSaga(action) {
   }
 }
 
+/* Create comment reply */
+
+/* create comment */
+const createPostCommentReply = ({ data }) => {
+    return axios
+      .post(`${API_URL}/reply/`, data)
+      .then(response => {
+        return response.data
+      });
+  };
+  export function* createPostCommentReplySaga(action) {
+    try {
+      const data = yield call(createPostCommentReply, action.data);
+      
+      yield put({
+        type: CREATE_POST_COMMENT_REPLY_SUCCEED,
+        payload: data
+      });
+      
+      /* fetch blogpost again to include comment */
+      yield put({
+        type: FETCH_BLOG_DETAIL,
+        data: {
+          id: action.data.postId,
+          type: action.data.type
+        }
+      });
+    } catch (error) {
+      yield put({
+        type: CREATE_POST_COMMENT_REPLY_FAILED,
+        error: 'Something went wrong!'
+      });
+    }
+  }
+
 export const blogDetailSaga = [
   takeEvery(FETCH_BLOG_DETAIL, fetchBlogByIdSaga),
   takeEvery(CREATE_BLOG_POST_COMMENT, createBlogPostCommentSaga),
+  takeEvery(CREATE_POST_COMMENT_REPLY, createPostCommentReplySaga),
 ];
