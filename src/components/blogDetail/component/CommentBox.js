@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { startCase } from 'lodash'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Avatar } from '@material-ui/core';
+import { OrangeButton } from 'components/common/components/Button'
 
 const useStyles = makeStyles(theme => ({
     mainDiv: {
@@ -57,60 +58,66 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         color: "#f65314",
-        background: "rgb(240, 240, 240)"
+        background: props => props.avatarBackground ? props.avatarBackground : "rgb(240, 240, 240)",
     },
     title: {
         fontSize: '22px'
     }
 }));
 
+const CommentFormat = (props) => {
+    const { data, type = "comment", children } = props;
+    const classes = useStyles({
+        avatarBackground: type !== 'comment' ? '#E0E0E0' : null
+    });
+    const name = startCase(data.email.split('@')[0].replace('.', ' '));
+    const avatarLetter = name.charAt(0);
+    const commentDate = moment(data.created).format('MMM DD, YYYY')
+    const commentOrReply = type === 'comment' ? data.comment : data.reply
+    return (
+        <Wrapper
+            key={commentOrReply}
+            bgColor={type !== 'comment' ? "rgb(240, 240, 240)" : null}
+        >
+            <div className={classes.avatarDiv}>
+                <Avatar variant="square" className={classes.avatar} >{avatarLetter}</Avatar>
+            </div>
+            <div className={classes.commentBox}>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                }}>
+                    <strong>{name}</strong>
+                    <span>{commentDate}</span>
+                </div>
+                <br />
+                <div>
+                    {commentOrReply}
+                </div>
+                <OrangeButton
+                    variant="contained"
+                    color="primary"
+                    padding="1px 5px"
+                    display={type === 'comment' ? 'inline-block' : 'none'}
+                    className={classes.button}
+                    style={{
+                        backgroundColor: '#f65314',
+                        marginTop: '16px',
+                        textTransform: 'none',
+                        fontSize: 12
+                    }}
+                >
+                    Reply
+                </OrangeButton>
+                {children}
+            </div>
+        </Wrapper>
+    )
+}
+
 const CommentBox = (props) => {
     const { comments } = props;
     const classes = useStyles();
-    const renderSingleComment = (data) => {
-        const name = startCase(data.email.split('@')[0].replace('.', ' '));
-        const avatarLetter = name.charAt(0);
-        const commentDate = moment(data.created).format('MMM DD, YYYY')
-        return (
-            <Wrapper key={data.comment}>
-                <div className={classes.avatarDiv}>
-                    <Avatar variant="square" className={classes.avatar} >{avatarLetter}</Avatar>
-                </div>
-                <div className={classes.commentBox}>
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                    }}>
-                        <strong>{name}</strong>
-                        <span>{commentDate}</span>
-                    </div>
-                    <br />
-                    <div>
-                        {data.comment}
-                    </div>
-
-                    {/* 
-                    
-                    Will be implemented in future
-                    
-                    <OrangeButton
-                        variant="contained"
-                        color="primary"
-                        padding="1px 5px"
-                        className={classes.button}
-                        style={{
-                            backgroundColor: '#f65314',
-                            marginTop: '16px',
-                            textTransform: 'none',
-                            fontSize: 12
-                        }}
-                    >
-                        Reply
-                    </OrangeButton> */}
-                </div>
-            </Wrapper>
-        )
-    }
     return (
         <div>
             <Typography className={classes.title} variant="p">
@@ -121,8 +128,23 @@ const CommentBox = (props) => {
                 }
             </Typography>
             {
+                // Render comments and replies
                 comments.map(each => {
-                    return renderSingleComment(each)
+                    const replies = each.reply;
+                    return (
+                        <div>
+                            <CommentFormat data={each} type={'comment'} >
+                                {
+                                    replies.map(eachReply => {
+                                        return <CommentFormat
+                                            data={eachReply}
+                                            type={'reply'}
+                                        />
+                                    })
+                                }
+                            </CommentFormat>
+                        </div>
+                    )
                 })
             }
         </div>
@@ -134,7 +156,7 @@ export default CommentBox
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    background-color: #E0E0E0;
+    background-color: ${props => props.bgColor ? props.bgColor : '#E0E0E0'} !important;
     padding: 20px;
     margin: 20px 0px;
 `
